@@ -29,9 +29,12 @@ class icinga {
     homedir => '/usr/local/icinga',
     managehome => false,
   }
-  #service{'icinga':
-  #  hasstatus => true,
-  #  ensure => running,
-  #  enable => true,
-  #}
+  service{[
+    'icinga',
+    'ido2db',
+  ]:
+    hasstatus => true,
+    ensure => running,
+    enable => true,
+  }
 }
