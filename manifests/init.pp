@@ -14,7 +14,7 @@ class icinga(
   $cfgdir = '/usr/local/icinga/etc',
   $webserver = false,
   $servername = absent,
-  $port = absent,
+  $port = absent
 ) {
   require gcc
   include icinga::objects
