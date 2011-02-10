@@ -10,8 +10,14 @@
 # the Free Software Foundation.
 #
 
-class icinga {
+class icinga(
+  $cfgdir = '/usr/local/icinga/etc',
+  $webserver = false,
+  $servername = absent,
+  $port = absent,
+) {
   require gcc
+  include icinga::objects
   package{[
     'libdbi',
     'libdbi-devel',
@@ -36,5 +42,37 @@ class icinga {
     hasstatus => true,
     ensure => running,
     enable => true,
+  }
+  Service['icinga']{
+    requires => Service['ido2db'],
+  }
+  file{[
+    '/usr/local/icinga/var/rw/cmd',
+    '/usr/local/icinga/var/rw/cmd/icinga.cmd',
+  ]:
+    ensure => directory,
+    require => [
+      User::Managed['icinga'],
+      User::Managed['icinga-cmd'],
+    ],
+    #require => Package['icinga'],
+    mode => 2660, owner => 'icinga', group => 'icinga-cmd',
+  }
+  file{"$icinga::cfgdir/icinga.cfg":
+    source => [
+      "puppet://$server/modules/site-icinga/$fqdn/icinga.cfg",
+      "puppet://$server/modules/site-icinga/icinga.cfg",
+      "puppet://$server/modules/icinga/icinga.cfg",
+    ],
+    notify => Service['icinga'],
+    #require => Package['icinga'],
+    mode => 0644, owner => root, group => root;
+  }
+  if $webserver {
+    class{'icinga::web':
+      webserver => $webserver,
+      servername => $servername,
+      port => $port,
+    }
   }
 }

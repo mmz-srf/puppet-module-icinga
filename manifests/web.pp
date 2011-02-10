@@ -3,10 +3,9 @@ class icinga::web(
   $webserver = 'apache',
   $port = 80
 ) {
-  require icinga
-  include $webserver
   case $webserver {
     'apache': {
+      include apache
       $webserver_conf = '/etc/httpd/vhosts.d/icinga-web.conf'
     }
     'nginx': {
