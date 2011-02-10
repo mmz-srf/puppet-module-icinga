@@ -9,11 +9,11 @@ class icinga::objects {
     host
       => "$icinga::cfgdir/objects/hosts.cfg",
     hostextinfo
-      => "$icinga::cfgdir/objects/hosts.cfg",
+      => "$icinga::cfgdir/objects/hostextinfos.cfg",
     hostgroup
-      => "$icinga::cfgdir/objects/hosts.cfg",
+      => "$icinga::cfgdir/objects/hostgroups.cfg",
     hostgroupescalation
-      => "$icinga::cfgdir/objects/hosts.cfg",
+      => "$icinga::cfgdir/objects/hostgroupescalations.cfg",
     service
       => "$icinga::cfgdir/objects/services.cfg",
     servicedependency
