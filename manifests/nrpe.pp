@@ -10,10 +10,7 @@ class icinga::nrpe(
     x86_64 => 'lib64',
     default => 'lib',
   }
-  package{[
-    'nagios-plugins-nrpe',
-    'nagios-nrpe',
-  ]:
+  package{'nrpe':
     ensure => installed,
   }
   file{[
