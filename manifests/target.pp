@@ -1,4 +1,4 @@
-class nagios::target {
+class icinga::target {
   @@nagios_host{$fqdn:
     address => $ipaddress,
     alias => $hostname,

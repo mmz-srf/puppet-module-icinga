@@ -59,7 +59,7 @@ define icinga::service (
   }
   @@nagios_service{"${hostname}_$name":
     ensure => $ensure,
-    notify => Service['nagios'],
+    notify => Service['icinga'],
     check_command => $real_check_command,
     host_name => $host_name,
 
