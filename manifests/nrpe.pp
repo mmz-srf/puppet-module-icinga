@@ -13,11 +13,9 @@ class icinga::nrpe(
   package{'nagios-nrpe':
     ensure => installed,
   }
-  file{[
-    $nrpe_cfgdir,
-    "$nrpe_cfgdir/nrpe.d",
-  ]:
+  file{"$nrpe_cfgdir/conf.d":
     ensure => directory,
+    require => Package['nrpe'],
     owner => root, group => root, mode => 755;
   }
   file{"$nrpe_cfgdir/nrpe.cfg":
@@ -25,7 +23,7 @@ class icinga::nrpe(
     notify => Service['nrpe'],
     owner => root, group => root, mode => 644;
   }
-  file{"$nrpe_cfgdir/nrpe.d/nrpe_commands.cfg":
+  file{"$nrpe_cfgdir/nrpe.d/default_commands.cfg":
     source => [
       "puppet://$server/modules/site-icinga/nrpe_commands.cfg.$architecture",
       "puppet://$server/modules/site-icinga/nrpe_commands.cfg",
