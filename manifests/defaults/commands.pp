@@ -69,8 +69,7 @@ class icinga::defaults::commands {
     http_port:
       command_line => '$USER1$/check_http -p $ARG1$ -H $HOSTADDRESS$ -I $HOSTADDRESS$';
     # from bind module
-    check_dig:
-      alias => dig2,
+    check_dig2:
       command_line => '$USER1$/check_dig -H $HOSTADDRESS$ -l $ARG1$ --record_type=$ARG2$';
   }
 
