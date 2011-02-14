@@ -44,7 +44,7 @@ class icinga(
     enable => true,
   }
   Service['icinga']{
-    requires => Service['ido2db'],
+    require => Service['ido2db'],
   }
   file{[
     '/usr/local/icinga/var/rw/cmd',
