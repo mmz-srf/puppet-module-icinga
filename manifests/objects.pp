@@ -12,8 +12,6 @@ class icinga::objects {
       => "$icinga::cfgdir/objects/hostextinfos.cfg",
     hostgroup
       => "$icinga::cfgdir/objects/hostgroups.cfg",
-    hostgroupescalation
-      => "$icinga::cfgdir/objects/hostgroupescalations.cfg",
     service
       => "$icinga::cfgdir/objects/services.cfg",
     servicedependency
@@ -33,7 +31,6 @@ class icinga::objects {
     $objects['host'],
     $objects['hostextinfo'],
     $objects['hostgroup'],
-    $objects['hostgroupescalation'],
     $objects['service'],
     $objects['servicedependency'],
     $objects['serviceescalation'],
@@ -52,7 +49,6 @@ class icinga::objects {
   Nagios_host <<||>>
   Nagios_hostextinfo <<||>>
   Nagios_hostgroup <<||>>
-  Nagios_hostgroupescalation <<||>>
   Nagios_service <<||>>
   Nagios_servicedependency <<||>>
   Nagios_serviceescalation <<||>>
@@ -66,7 +62,6 @@ class icinga::objects {
     'nagios_host',
     'nagios_hostextinfo',
     'nagios_hostgroup',
-    'nagios_hostgroupescalation',
     'nagios_service',
     'nagios_servicedependency',
     'nagios_serviceextinfo',
@@ -92,9 +87,6 @@ class icinga::objects {
   }
   Nagios_hostgroup <||> {
     target => $objects['hostgroup'],
-  }
-  Nagios_hostgroupescalation <||> {
-    target => $objects['hostgroupescalation'],
   }
   Nagios_service <||> {
     target => $objects['service'],
