@@ -80,7 +80,6 @@ define icinga::service (
     freshness_threshold => $freshness_threshold,
     high_flap_threshold => $high_flap_threshold,
     hostgroup_name => $hostgroup_name,
-    host_name => $host_name,
     icon_image => $icon_image,
     icon_image_alt => $icon_image_alt,
     initial_state => $initial_state,
