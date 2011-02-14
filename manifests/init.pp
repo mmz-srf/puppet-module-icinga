@@ -73,15 +73,39 @@ class icinga(
     ],
     owner => root, group => root, mode => 2660;
   }
-  file{"$icinga::cfgdir/icinga.cfg":
-    source => [
-      "puppet://$server/modules/site-icinga/$fqdn/icinga.cfg",
-      "puppet://$server/modules/site-icinga/icinga.cfg",
-      "puppet://$server/modules/icinga/icinga.cfg",
-    ],
-    notify => Service['icinga'],
-    #require => Package['icinga'],
-    owner => root, group => root, mode => 0644;
+  file{
+    "$icinga::cfgdir/icinga.cfg":
+      source => [
+        "puppet://$server/modules/site-icinga/$fqdn/icinga.cfg",
+        "puppet://$server/modules/site-icinga/icinga.cfg",
+        "puppet://$server/modules/icinga/icinga.cfg",
+      ],
+      notify => Service['icinga'],
+      owner => root, group => root, mode => 0644;
+    "$icinga::cfgdir/ido2db.cfg":
+      source => [
+        "puppet://$server/modules/site-icinga/$fqdn/ido2db.cfg",
+        "puppet://$server/modules/site-icinga/ido2db.cfg",
+        "puppet://$server/modules/icinga/ido2db.cfg",
+      ],
+      notify => Service['icinga'],
+      owner => root, group => root, mode => 0644;
+    "$icinga::cfgdir/idomod.cfg":
+      source => [
+        "puppet://$server/modules/site-icinga/$fqdn/ido2db.cfg",
+        "puppet://$server/modules/site-icinga/ido2db.cfg",
+        "puppet://$server/modules/icinga/ido2db.cfg",
+      ],
+      notify => Service['icinga'],
+      owner => root, group => root, mode => 0644;
+    "$icinga::cfgdir/resource.cfg":
+      source => [
+        "puppet://$server/modules/site-icinga/$fqdn/resource.cfg",
+        "puppet://$server/modules/site-icinga/resource.cfg",
+        "puppet://$server/modules/icinga/resource.cfg",
+      ],
+      notify => Service['icinga'],
+      owner => root, group => root, mode => 0644;
   }
   if $webserver {
     class{'icinga::web':
