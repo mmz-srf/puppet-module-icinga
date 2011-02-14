@@ -1,10 +1,10 @@
 class icinga::nrpe(
-  $cfgdir = '/etc/nagios',
-  $allowed_hosts = '127.0.0.1',
-  $dont_blame_nrpe = 1,
-  $debug = 0,
-  $command_timeout = 60,
-  $connection_timeout = 300
+  $nrpe_cfgdir = '/etc/nagios',
+  $nrpe_allowed_hosts = '127.0.0.1',
+  $nrpe_dont_blame_nrpe = 1,
+  $nrpe_debug = 0,
+  $nrpe_command_timeout = 60,
+  $nrpe_connection_timeout = 300
 ) {
   $libdir = $architecture ? {
     x86_64 => 'lib64',
@@ -14,18 +14,18 @@ class icinga::nrpe(
     ensure => installed,
   }
   file{[
-    $cfgdir,
-    "$cfgdir/nrpe.d",
+    $nrpe_cfgdir,
+    "$nrpe_cfgdir/nrpe.d",
   ]:
     ensure => directory,
     owner => root, group => root, mode => 755;
   }
-  file{"$cfgdir/nrpe.cfg":
+  file{"$nrpe_cfgdir/nrpe.cfg":
     content => template('icinga/nrpe.cfg.erb'),
     notify => Service['nrpe'],
     owner => root, group => root, mode => 644;
   }
-  file{"$cfgdir/nrpe.d/nrpe_commands.cfg":
+  file{"$nrpe_cfgdir/nrpe.d/nrpe_commands.cfg":
     source => [
       "puppet://$server/modules/site-icinga/configs/nrpe/nrpe_commands.cfg.$architecture",
       "puppet://$server/modules/site-icinga/configs/nrpe/nrpe_commands.cfg",
