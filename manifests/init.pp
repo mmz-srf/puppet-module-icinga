@@ -55,6 +55,15 @@ class icinga(
     #require => Package['icinga'],
     mode => 2660, owner => 'icinga', group => 'icinga-cmd',
   }
+  file{'/usr/local/icinga/var/rw/cmd/icinga.cmd':
+    source => "puppet://$server/modules/icinga/icinga.cmd",
+    require => [
+      User::Managed['icinga'],
+      User::Managed['icinga-cmd'],
+    ],
+    #require => Package['icinga'],
+    mode => 2660, owner => 'icinga', group => 'icinga-cmd',
+  }
   file{"$icinga::cfgdir/icinga.cfg":
     source => [
       "puppet://$server/modules/site-icinga/$fqdn/icinga.cfg",
