@@ -1,6 +1,4 @@
 class icinga::objects {
-  include icinga::defaults
-
   $objects = {
     command
       => "$icinga::cfgdir/objects/commands.cfg",
@@ -116,4 +114,5 @@ class icinga::objects {
     notify => Service['icinga'],
     mode => 0755, owner => root, group => root;
   }
+  include icinga::defaults
 }
