@@ -55,14 +55,23 @@ class icinga(
     #require => Package['icinga'],
     mode => 2660, owner => 'icinga', group => 'icinga-cmd',
   }
-  file{'/usr/local/icinga/var/rw/cmd/icinga.cmd':
-    source => "puppet://$server/modules/icinga/icinga.cmd",
+  exec{'icinga.cmd':
+    command => 'mkfifo /usr/local/icinga/var/rw/cmd/icinga.cmd',
+    creates => '/usr/local/icinga/var/rw/cmd/icinga.cmd',
     require => [
       User::Managed['icinga'],
       User::Managed['icinga-cmd'],
     ],
     #require => Package['icinga'],
-    mode => 2660, owner => 'icinga', group => 'icinga-cmd',
+  }
+  file{'/usr/local/icinga/var/rw/cmd/icinga.cmd':
+    ensure => present,
+    replace => false,
+    owner => root, group => root, mode => 2660;
+    require => [
+      #Package['icinga'],
+      Exec['icinga.cmd'],
+    ],
   }
   file{"$icinga::cfgdir/icinga.cfg":
     source => [
@@ -72,7 +81,7 @@ class icinga(
     ],
     notify => Service['icinga'],
     #require => Package['icinga'],
-    mode => 0644, owner => root, group => root;
+    owner => root, group => root, mode => 0644;
   }
   if $webserver {
     class{'icinga::web':
