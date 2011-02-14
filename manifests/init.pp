@@ -88,7 +88,7 @@ class icinga(
         "puppet://$server/modules/site-icinga/ido2db.cfg",
         "puppet://$server/modules/icinga/ido2db.cfg",
       ],
-      notify => Service['icinga'],
+      notify => Service['ido2db'],
       owner => root, group => root, mode => 0644;
     "$icinga::cfgdir/idomod.cfg":
       source => [
@@ -96,7 +96,10 @@ class icinga(
         "puppet://$server/modules/site-icinga/ido2db.cfg",
         "puppet://$server/modules/icinga/ido2db.cfg",
       ],
-      notify => Service['icinga'],
+      notify => [
+        Service['ido2db'],
+        Service['icinga'],
+      ],
       owner => root, group => root, mode => 0644;
     "$icinga::cfgdir/resource.cfg":
       source => [
