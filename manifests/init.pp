@@ -67,11 +67,11 @@ class icinga(
   file{'/usr/local/icinga/var/rw/cmd/icinga.cmd':
     ensure => present,
     replace => false,
-    owner => root, group => root, mode => 2660;
     require => [
-      #Package['icinga'],
       Exec['icinga.cmd'],
+      #Package['icinga'],
     ],
+    owner => root, group => root, mode => 2660;
   }
   file{"$icinga::cfgdir/icinga.cfg":
     source => [
