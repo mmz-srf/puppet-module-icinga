@@ -106,8 +106,7 @@ class icinga::objects {
 
   # purge unmanaged icinga cfg files
   # must be defined after exported resource overrides and cfg file defs
-  file{'icinga_cfgdir':
-    path => "$icinga::cfgdir/",
+  file{"$icinga::cfgdir/":
     source => "puppet://$server/modules/common/empty",
     ensure => directory,
     recurse => true,
