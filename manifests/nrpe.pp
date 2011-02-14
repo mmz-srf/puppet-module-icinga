@@ -27,9 +27,9 @@ class icinga::nrpe(
   }
   file{"$nrpe_cfgdir/nrpe.d/nrpe_commands.cfg":
     source => [
-      "puppet://$server/modules/site-icinga/configs/nrpe/nrpe_commands.cfg.$architecture",
-      "puppet://$server/modules/site-icinga/configs/nrpe/nrpe_commands.cfg",
-      "puppet://$server/modules/icinga/nrpe/nrpe_commands.cfg.$architecture",
+      "puppet://$server/modules/site-icinga/nrpe_commands.cfg.$architecture",
+      "puppet://$server/modules/site-icinga/nrpe_commands.cfg",
+      "puppet://$server/modules/icinga/nrpe_commands.cfg.$architecture",
     ],
     notify => Service['nrpe'],
     owner => root, group => root, mode => 644;
