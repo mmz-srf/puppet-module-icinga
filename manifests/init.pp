@@ -46,10 +46,7 @@ class icinga(
   Service['icinga']{
     require => Service['ido2db'],
   }
-  file{[
-    '/usr/local/icinga/var/rw/cmd',
-    '/usr/local/icinga/var/rw/cmd/icinga.cmd',
-  ]:
+  file{'/usr/local/icinga/var/rw/cmd':
     ensure => directory,
     require => [
       User::Managed['icinga'],
