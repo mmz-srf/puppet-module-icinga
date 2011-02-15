@@ -17,6 +17,10 @@ class icinga(
   include icinga::objects
   package{[
     'icinga',
+    'icinga-gui',
+    'icinga-api',
+    'icinga-doc',
+    'icinga-idoutils',
     'libdbi',
     'libdbi-devel',
     'libdbi-drivers',
