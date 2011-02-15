@@ -68,6 +68,7 @@ class icinga::objects {
     'nagios_timeperiod',
   ]:
     notify => Service['icinga'],
+    require => Package['icinga'],
   }
 
   Nagios_command <||> {
