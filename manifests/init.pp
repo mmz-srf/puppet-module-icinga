@@ -11,7 +11,7 @@
 #
 
 class icinga(
-  $cfgdir = '/etc/icinga',
+  $cfgdir = '/etc/icinga'
 ) {
   require gcc
   include icinga::objects
