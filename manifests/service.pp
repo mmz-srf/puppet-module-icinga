@@ -3,7 +3,7 @@ define icinga::service (
   $nrpe_args = '',
   $ensure = present,
   $host_name = $fqdn,
-  use_nrpe => false,
+  use_nrpe = false,
 
   $action_url = false,
   $active_checks_enabled = false,
