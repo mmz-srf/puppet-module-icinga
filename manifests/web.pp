@@ -3,6 +3,7 @@ class icinga::web(
   $webserver = 'apache',
   $port = 80
 ) {
+  include icinga
   case $webserver {
     'apache': {
       include apache
@@ -16,12 +17,12 @@ class icinga::web(
       fail "webserver '$webserver' is not supported."
     }
   }
-  file{'webserver-config':
-    content => template("icinga/webserver-conf.$webserver.erb"),
-    path => $webserver_conf,
-    notify => Service[$webserver],
-    owner => root, group => root, mode => 0444;
-  }
+  #file{'webserver-config':
+  #  content => template("icinga/webserver-conf.$webserver.erb"),
+  #  path => $webserver_conf,
+  #  notify => Service[$webserver],
+  #  owner => root, group => root, mode => 0444;
+  #}
   user::groups::manage_member{"${webserver}-in-icinga-cmd":
     user => $webserver,
     group => 'icinga-cmd',
