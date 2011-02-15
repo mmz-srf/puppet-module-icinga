@@ -13,7 +13,7 @@ class icinga::nrpe(
   package{'nagios-nrpe':
     ensure => installed,
   }
-  file{"$nrpe_cfgdir/conf.d":
+  file{"$nrpe_cfgdir/nrpe.d":
     ensure => directory,
     require => Package['nagios-nrpe'],
     owner => root, group => root, mode => 755;
