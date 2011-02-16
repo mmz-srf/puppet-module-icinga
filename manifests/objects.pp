@@ -121,6 +121,7 @@ class icinga::objects {
     ensure => directory,
     purge => true,
     recurse => true,
+    require => Package['icinga'],
     notify => Service['icinga'],
     mode => 0555, owner => root, group => root;
   }
