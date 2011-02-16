@@ -26,9 +26,11 @@ class icinga::nrpe(
   }
   file{"$nrpe_cfgdir/nrpe.d/default_commands.cfg":
     source => [
-      "puppet://$server/modules/site-icinga/default_commands.cfg.$architecture",
-      "puppet://$server/modules/site-icinga/default_commands.cfg",
-      "puppet://$server/modules/icinga/default_commands.cfg.$architecture",
+      "puppet://$server/modules/site-icinga/nrpe/$fqdn/default_commands.cfg.$architecture",
+      "puppet://$server/modules/site-icinga/nrpe/$fqdn/default_commands.cfg",
+      "puppet://$server/modules/site-icinga/nrpe/default_commands.cfg.$architecture",
+      "puppet://$server/modules/site-icinga/nrpe/default_commands.cfg",
+      "puppet://$server/modules/icinga/nrpe/default_commands.cfg.$architecture",
     ],
     require => Fiel["$nrpe_cfgdir/nrpe.d"],
     notify => Service['nrpe'],

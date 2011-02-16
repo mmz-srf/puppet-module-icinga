@@ -10,7 +10,7 @@ class icinga::web(
   file{
     '/usr/share/icinga-web/app/config/databases.xml':
       source => [
-        "puppet://$server/modules/site-icinga/$fqdn/icinga-web/databases.xml",
+        "puppet://$server/modules/site-icinga/icinga-web/$fqdn/databases.xml",
         "puppet://$server/modules/site-icinga/icinga-web/databases.xml",
         "puppet://$server/modules/icinga/icinga-web/databases.xml",
       ],
@@ -19,7 +19,7 @@ class icinga::web(
       owner => root, group => root, mode => 0444;
     '/usr/share/icinga-web/app/modules/Web/config/icinga-io.xml':
       source => [
-        "puppet://$server/modules/site-icinga/$fqdn/icinga-web/icinga-io.xml",
+        "puppet://$server/modules/site-icinga/icinga-web/$fqdn/icinga-io.xml",
         "puppet://$server/modules/site-icinga/icinga-web/icinga-io.xml",
         "puppet://$server/modules/icinga/icinga-web/icinga-io.xml",
       ],
@@ -28,7 +28,7 @@ class icinga::web(
       owner => root, group => root, mode => 0444;
     '/usr/share/icinga-web/app/modules/AppKit/config/auth.xml':
       source => [
-        "puppet://$server/modules/site-icinga/$fqdn/icinga-web/auth.xml",
+        "puppet://$server/modules/site-icinga/icinga-web/$fqdn/auth.xml",
         "puppet://$server/modules/site-icinga/icinga-web/auth.xml",
         "puppet://$server/modules/icinga/icinga-web/auth.xml",
       ],
