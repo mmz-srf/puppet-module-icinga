@@ -24,7 +24,7 @@ class icinga(
     'icinga-idoutils',
     'libdbi-dbd-mysql',
     'libdbi-dbd-pgsql',
-    'nagios-plugins',
+    'nagios-plugins-all',
   ]:
     ensure => present,
   }
@@ -50,7 +50,7 @@ class icinga(
     ensure => "/usr/$libdir/nagios/plugins",
     require => [
       Package['icinga'],
-      Package['nagios-plugins'],
+      Package['nagios-plugins-all'],
     ],
   }
 }
