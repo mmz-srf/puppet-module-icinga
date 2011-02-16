@@ -1,7 +1,7 @@
 class icinga::web(
   $webserver = 'apache',
-  $webserver_hostname = 'localhost',
-  $webserver_port = 80
+  $servername = 'localhost',
+  $port = 80
 ) {
   require icinga
   file{
