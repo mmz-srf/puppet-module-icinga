@@ -4,6 +4,9 @@ class icinga::web(
   $port = 80
 ) {
   require icinga
+  package{'icinga-web':
+    ensure => present,
+  }
   file{
     '/usr/share/icinga-web/app/config/databases.xml':
       source => [
