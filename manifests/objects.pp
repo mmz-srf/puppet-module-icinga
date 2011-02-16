@@ -1,4 +1,5 @@
 class icinga::objects {
+  include icinga::defaults
   $objects = {
     command
       => "$icinga::cfgdir/objects/commands.cfg",
@@ -39,21 +40,10 @@ class icinga::objects {
   ]:
     ensure => present,
     replace => false,
+    require => Package['icinga'],
     notify => Service['icinga'],
     owner => root, group => root, mode => 0644;
   }
-
-  Nagios_command <<||>>
-  Nagios_contact <<||>>
-  Nagios_contactgroup <<||>>
-  Nagios_host <<||>>
-  Nagios_hostextinfo <<||>>
-  Nagios_hostgroup <<||>>
-  Nagios_service <<||>>
-  Nagios_servicedependency <<||>>
-  Nagios_serviceescalation <<||>>
-  Nagios_serviceextinfo <<||>>
-  Nagios_timeperiod <<||>>
 
   resources{[
     'nagios_command',
@@ -70,6 +60,18 @@ class icinga::objects {
     notify => Service['icinga'],
     require => Package['icinga'],
   }
+
+  Nagios_command <<||>>
+  Nagios_contact <<||>>
+  Nagios_contactgroup <<||>>
+  Nagios_host <<||>>
+  Nagios_hostextinfo <<||>>
+  Nagios_hostgroup <<||>>
+  Nagios_service <<||>>
+  Nagios_servicedependency <<||>>
+  Nagios_serviceescalation <<||>>
+  Nagios_serviceextinfo <<||>>
+  Nagios_timeperiod <<||>>
 
   Nagios_command <||> {
     target => $objects['command'],
@@ -115,5 +117,4 @@ class icinga::objects {
     notify => Service['icinga'],
     mode => 0755, owner => root, group => root;
   }
-  include icinga::defaults
 }
