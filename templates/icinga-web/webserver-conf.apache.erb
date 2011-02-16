@@ -1,8 +1,8 @@
 <VirtualHost *:<%= port %>>
   ServerName <%= servername %>
 
-  Alias /icinga-web/js/ext3 /usr/local/icinga-web/lib/ext3
-  Alias /icinga-web /usr/local/icinga-web/pub
+  Alias /icinga-web/js/ext3 /usr/share/icinga-web/lib/ext3
+  Alias /icinga-web /usr/share/icinga-web/pub
   
   RewriteEngine On
   RewriteRule ^/$ https://<%= servername %>/icinga-web
