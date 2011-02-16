@@ -1,9 +1,29 @@
 class icinga::web(
-  $servername,
   $webserver = 'apache',
-  $port = 80
+  $webserver_hostname = 'localhost',
+  $webserver_port = 80,
 ) {
-  include icinga
+  require icinga
+  file{
+    '/usr/share/icinga-web/app/config/databases.xml':
+      source => [
+        "puppet://$server/modules/site-icinga/$fqdn/icinga-web/databases.xml",
+        "puppet://$server/modules/site-icinga/icinga-web/databases.xml",
+        "puppet://$server/modules/icinga/icinga-web/databases.xml",
+      ],
+      require => Package['icinga-web'],
+      notify => Service[$webserver],
+      owner => root, group => root, mode => 0644;
+    '/usr/share/icinga-web/app/modules/Web/config/icinga-io.xml':
+      source => [
+        "puppet://$server/modules/site-icinga/$fqdn/icinga-web/icinga-io.xml",
+        "puppet://$server/modules/site-icinga/icinga-web/icinga-io.xml",
+        "puppet://$server/modules/icinga/icinga-web/icinga-io.xml",
+      ],
+      require => Package['icinga-web'],
+      notify => Service[$webserver],
+      owner => root, group => root, mode => 0644;
+  }
   case $webserver {
     'apache': {
       include apache
