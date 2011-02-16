@@ -40,7 +40,7 @@
 						<ae:parameter name="type">IcingaApi::COMMAND_PIPE</ae:parameter>
 						<ae:parameter name="enabled">true</ae:parameter>
 						
-						<ae:parameter name="pipe">/usr/local/icinga/var/rw/icinga.cmd</ae:parameter>
+						<ae:parameter name="pipe">/var/icinga/rw/icinga.cmd</ae:parameter>
 
 						<ae:parameter name="instance">default</ae:parameter>
 						<ae:parameter name="broadcast">false</ae:parameter>
@@ -72,7 +72,6 @@
 						<ae:parameter name="broadcast">true</ae:parameter>
 					</ae:parameter>
 
-					-->
 
 					<ae:parameter name="ssh1">
 						<ae:parameter name="type">IcingaApi::COMMAND_SSH</ae:parameter>
@@ -88,6 +87,8 @@
 						<ae:parameter name="instance">default</ae:parameter>
 						<ae:parameter name="broadcast">false</ae:parameter>
 					</ae:parameter>
+
+					-->
 				</setting>
 
 </settings>
