@@ -47,7 +47,7 @@ class icinga::web(
     }
   }
   file{'webserver-config':
-    content => template("icinga/webserver-conf.$webserver.erb"),
+    content => template("icinga/icinga-web/webserver-conf.$webserver.erb"),
     path => $webserver_conf,
     require => Package['icinga-web'],
     notify => Service[$webserver],
