@@ -123,6 +123,6 @@ class icinga::objects {
     recurse => true,
     require => Package['icinga'],
     notify => Service['icinga'],
-    mode => 0555, owner => root, group => root;
+    owner => root, group => root, mode => 0555;
   }
 }
