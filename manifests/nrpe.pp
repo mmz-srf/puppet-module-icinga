@@ -20,6 +20,7 @@ class icinga::nrpe(
   }
   file{"$nrpe_cfgdir/nrpe.cfg":
     content => template('icinga/nrpe.cfg.erb'),
+    require => Package['nagios-nrpe'],
     notify => Service['nrpe'],
     owner => root, group => root, mode => 444;
   }
@@ -29,6 +30,7 @@ class icinga::nrpe(
       "puppet://$server/modules/site-icinga/default_commands.cfg",
       "puppet://$server/modules/icinga/default_commands.cfg.$architecture",
     ],
+    require => Fiel["$nrpe_cfgdir/nrpe.d"],
     notify => Service['nrpe'],
     owner => root, group => root, mode => 444;
   }
