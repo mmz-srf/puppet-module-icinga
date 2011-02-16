@@ -46,11 +46,11 @@ class icinga(
     'idomod',
     'resource',
   ]:}
-  file{'/usr/share/icinga/plugins':
-    ensure => "/usr/$libdir/nagios/plugins",
-    require => [
-      Package['icinga'],
-      Package['nagios-plugins'],
-    ],
-  }
+  #file{'/usr/share/icinga/plugins':
+  #  ensure => "/usr/$libdir/nagios/plugins",
+  #  require => [
+  #    Package['icinga'],
+  #    Package['nagios-plugins'],
+  #  ],
+  #}
 }
