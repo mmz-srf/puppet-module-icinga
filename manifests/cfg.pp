@@ -13,6 +13,6 @@ define icinga::cfg {
       Service['icinga'],
       Service['ido2db'],
     ],
-    owner => root, group => root, mode => 0644;
+    owner => root, group => root, mode => 0444;
   }
 }

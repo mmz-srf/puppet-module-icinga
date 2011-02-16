@@ -16,12 +16,12 @@ class icinga::nrpe(
   file{"$nrpe_cfgdir/nrpe.d":
     ensure => directory,
     require => Package['nagios-nrpe'],
-    owner => root, group => root, mode => 755;
+    owner => root, group => root, mode => 555;
   }
   file{"$nrpe_cfgdir/nrpe.cfg":
     content => template('icinga/nrpe.cfg.erb'),
     notify => Service['nrpe'],
-    owner => root, group => root, mode => 644;
+    owner => root, group => root, mode => 444;
   }
   file{"$nrpe_cfgdir/nrpe.d/default_commands.cfg":
     source => [
@@ -30,7 +30,7 @@ class icinga::nrpe(
       "puppet://$server/modules/icinga/default_commands.cfg.$architecture",
     ],
     notify => Service['nrpe'],
-    owner => root, group => root, mode => 644;
+    owner => root, group => root, mode => 444;
   }
   service{'nrpe':
     ensure => running,

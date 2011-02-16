@@ -43,7 +43,7 @@ class icinga::objects {
     replace => false,
     require => Package['icinga'],
     notify => Service['icinga'],
-    owner => root, group => root, mode => 0644;
+    owner => root, group => root, mode => 0444;
   }
 
   Nagios_command <<||>>
@@ -122,6 +122,6 @@ class icinga::objects {
     recurse => true,
     purge => true,
     notify => Service['icinga'],
-    mode => 0755, owner => root, group => root;
+    mode => 0555, owner => root, group => root;
   }
 }
