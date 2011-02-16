@@ -17,13 +17,13 @@ class icinga::objects {
     service
       => "$icinga::cfgdir/objects/services.cfg",
     servicedependency
-      => "$icinga::cfgdir/objects/servicedependency.cfg",
+      => "$icinga::cfgdir/objects/servicedependencies.cfg",
     serviceescalation
-      => "$icinga::cfgdir/objects/serviceescalation.cfg",
+      => "$icinga::cfgdir/objects/serviceescalations.cfg",
     serviceextinfo
-      => "$icinga::cfgdir/objects/serviceextinfo.cfg",
+      => "$icinga::cfgdir/objects/serviceextinfos.cfg",
     timeperiod
-      => "$icinga::cfgdir/objects/timeperiod.cfg",
+      => "$icinga::cfgdir/objects/timeperiods.cfg",
   }
 
   file{[
