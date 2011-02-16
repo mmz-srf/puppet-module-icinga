@@ -122,7 +122,6 @@ class icinga::objects {
   ]:
     source => "puppet://$server/modules/common/empty",
     ensure => directory,
-    recurse => true,
     purge => true,
     notify => Service['icinga'],
     mode => 0555, owner => root, group => root;
