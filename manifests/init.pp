@@ -25,6 +25,7 @@ class icinga(
     'libdbi-dbd-mysql',
     'libdbi-dbd-pgsql',
     'nagios-plugins-all',
+    'nagios-plugins-nrpe',
   ]:
     ensure => present,
   }
