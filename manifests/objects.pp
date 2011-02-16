@@ -45,22 +45,6 @@ class icinga::objects {
     owner => root, group => root, mode => 0644;
   }
 
-  resources{[
-    'nagios_command',
-    'nagios_contact',
-    'nagios_contactgroup',
-    'nagios_host',
-    'nagios_hostextinfo',
-    'nagios_hostgroup',
-    'nagios_service',
-    'nagios_servicedependency',
-    'nagios_serviceextinfo',
-    'nagios_timeperiod',
-  ]:
-    notify => Service['icinga'],
-    require => Package['icinga'],
-  }
-
   Nagios_command <<||>>
   Nagios_contact <<||>>
   Nagios_contactgroup <<||>>
@@ -75,36 +59,58 @@ class icinga::objects {
 
   Nagios_command <||> {
     target => $objects['command'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_contact <||> {
     target => $objects['contact'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_contactgroup <||> {
     target => $objects['contactgroup'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_host <||> {
     target => $objects['host'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_hostextinfo <||> {
     target => $objects['hostgroup'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_hostgroup <||> {
     target => $objects['hostgroup'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_service <||> {
     target => $objects['service'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_servicedependency <||> {
     target => $objects['servicedependency'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_serviceescalation <||> {
     target => $objects['serviceescalation'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_serviceextinfo <||> {
     target => $objects['serviceextinfo'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
   Nagios_timeperiod <||> {
     target => $objects['timeperiod'],
+    require => Package['icinga'],
+    notify => Service['icinga'],
   }
 
   # purge unmanaged icinga cfg files
