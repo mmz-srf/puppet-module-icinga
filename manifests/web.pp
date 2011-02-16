@@ -23,6 +23,15 @@ class icinga::web(
       require => Package['icinga-web'],
       notify => Service[$webserver],
       owner => root, group => root, mode => 0644;
+    '/usr/share/icinga-web/app/modules/AppKit/config/auth.xml':
+      source => [
+        "puppet://$server/modules/site-icinga/$fqdn/icinga-web/auth.xml",
+        "puppet://$server/modules/site-icinga/icinga-web/auth.xml",
+        "puppet://$server/modules/icinga/icinga-web/auth.xml",
+      ],
+      require => Package['icinga-web'],
+      notify => Service[$webserver],
+      owner => root, group => root, mode => 0644;
   }
   case $webserver {
     'apache': {
