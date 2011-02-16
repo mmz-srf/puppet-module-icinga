@@ -7,7 +7,7 @@ class icinga::web(
   case $webserver {
     'apache': {
       include apache
-      $webserver_conf = '/etc/httpd/vhosts.d/icinga-web.conf'
+      $webserver_conf = '/etc/httpd/conf.d/icinga-web.conf'
     }
     'nginx': {
       include nginx::spawn-fcgi
@@ -17,12 +17,13 @@ class icinga::web(
       fail "webserver '$webserver' is not supported."
     }
   }
-  #file{'webserver-config':
-  #  content => template("icinga/webserver-conf.$webserver.erb"),
-  #  path => $webserver_conf,
-  #  notify => Service[$webserver],
-  #  owner => root, group => root, mode => 0444;
-  #}
+  file{'webserver-config':
+    content => template("icinga/webserver-conf.$webserver.erb"),
+    path => $webserver_conf,
+    require => Package['icinga-web'],
+    notify => Service[$webserver],
+    owner => root, group => root, mode => 0444;
+  }
   user::groups::manage_member{"${webserver}-in-icingacmd":
     user => $webserver,
     group => 'icingacmd',
