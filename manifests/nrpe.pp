@@ -32,7 +32,7 @@ class icinga::nrpe(
       "puppet://$server/modules/site-icinga/nrpe/default_commands.cfg",
       "puppet://$server/modules/icinga/nrpe/default_commands.cfg.$architecture",
     ],
-    require => Fiel["$nrpe_cfgdir/nrpe.d"],
+    require => File["$nrpe_cfgdir/nrpe.d"],
     notify => Service['nrpe'],
     owner => root, group => root, mode => 444;
   }
