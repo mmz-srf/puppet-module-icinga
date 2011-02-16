@@ -48,6 +48,9 @@ class icinga(
   ]:}
   file{'/usr/share/icinga/plugins':
     ensure => "/usr/$libdir/nagios/plugins",
-    require => Package['nagios-plugins'],
+    require => [
+      Package['icinga'],
+      Package['nagios-plugins'],
+    ],
   }
 }
