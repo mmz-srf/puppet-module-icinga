@@ -13,6 +13,7 @@
 class icinga(
   $cfgdir = '/etc/icinga'
 ) {
+  require icinga::plugins
   include icinga::objects
   $libdir = $architecture ? {
     x86_64 => 'lib64',
@@ -24,7 +25,6 @@ class icinga(
     'icinga-idoutils',
     'libdbi-dbd-mysql',
     'libdbi-dbd-pgsql',
-    'nagios-plugins-all',
     'nagios-plugins-nrpe',
   ]:
     ensure => present,
