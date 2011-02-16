@@ -1,5 +1,6 @@
 class icinga::objects {
   include icinga::defaults
+
   $objects = {
     command
       => "$icinga::cfgdir/objects/commands.cfg",

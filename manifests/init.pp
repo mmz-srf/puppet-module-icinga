@@ -13,19 +13,20 @@
 class icinga(
   $cfgdir = '/etc/icinga'
 ) {
-  require gcc
   include icinga::objects
+  $libdir = $architecture ? {
+    x86_64 => 'lib64',
+    default => 'lib',
+  }
   package{[
     'icinga',
     'icinga-gui',
     'icinga-api',
     'icinga-doc',
     'icinga-idoutils',
-    'libdbi',
-    'libdbi-devel',
-    'libdbi-drivers',
     'libdbi-dbd-mysql',
     'libdbi-dbd-pgsql',
+    'nagios-plugins',
   ]:
     ensure => present,
   }
@@ -40,45 +41,15 @@ class icinga(
   Service['icinga']{
     require => Service['ido2db'],
   }
-  file{
-    "$icinga::cfgdir/icinga.cfg":
-      source => [
-        "puppet://$server/modules/site-icinga/$fqdn/icinga.cfg",
-        "puppet://$server/modules/site-icinga/icinga.cfg",
-        "puppet://$server/modules/icinga/icinga.cfg",
-      ],
-      require => Package['icinga'],
-      notify => Service['icinga'],
-      owner => root, group => root, mode => 0644;
-    "$icinga::cfgdir/ido2db.cfg":
-      source => [
-        "puppet://$server/modules/site-icinga/$fqdn/ido2db.cfg",
-        "puppet://$server/modules/site-icinga/ido2db.cfg",
-        "puppet://$server/modules/icinga/ido2db.cfg",
-      ],
-      require => Package['icinga'],
-      notify => Service['ido2db'],
-      owner => root, group => root, mode => 0644;
-    "$icinga::cfgdir/idomod.cfg":
-      source => [
-        "puppet://$server/modules/site-icinga/$fqdn/idomod.cfg",
-        "puppet://$server/modules/site-icinga/idomod.cfg",
-        "puppet://$server/modules/icinga/idomod.cfg",
-      ],
-      require => Package['icinga'],
-      notify => [
-        Service['ido2db'],
-        Service['icinga'],
-      ],
-      owner => root, group => root, mode => 0644;
-    "$icinga::cfgdir/resource.cfg":
-      source => [
-        "puppet://$server/modules/site-icinga/$fqdn/resource.cfg",
-        "puppet://$server/modules/site-icinga/resource.cfg",
-        "puppet://$server/modules/icinga/resource.cfg",
-      ],
-      require => Package['icinga'],
-      notify => Service['icinga'],
-      owner => root, group => root, mode => 0644;
+  icinga::cfg{[
+    'icinga',
+    'cgi',
+    'ido2db',
+    'idomod',
+    'resource',
+  ]:}
+  file{'/usr/share/icinga/plugins':
+    ensure => "/usr/$libdir/nagios/plugins",
+    require => Package['nagios-plugins'],
   }
 }
