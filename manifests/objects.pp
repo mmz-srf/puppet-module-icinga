@@ -118,7 +118,7 @@ class icinga::objects {
   # must be defined after exported resource overrides and cfg file defs
   file{[
     "$icinga::cfgdir/",
-    "$icinga::cfgdir/objects",
+    "$icinga::cfgdir/objects/",
   ]:
     source => "puppet://$server/modules/common/empty",
     ensure => directory,
