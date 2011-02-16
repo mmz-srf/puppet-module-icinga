@@ -20,9 +20,7 @@ class icinga(
   }
   package{[
     'icinga',
-    'icinga-gui',
     'icinga-api',
-    'icinga-doc',
     'icinga-idoutils',
     'libdbi-dbd-mysql',
     'libdbi-dbd-pgsql',
