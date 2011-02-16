@@ -3,3 +3,4 @@ command[check_load]=/usr/lib64/nagios/plugins/check_load -w $ARG1$ -c $ARG2$
 command[check_disk]=/usr/lib64/nagios/plugins/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
 command[check_procs]=/usr/lib64/nagios/plugins/check_procs -w $ARG1$ -c $ARG2$ -s $ARG3$
 command[check_swap]=/usr/lib64/nagios/plugins/check_swap $ARG1$
+command[check_ping]=/usr/lib64/nagios/plugins/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
