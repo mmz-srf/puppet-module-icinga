@@ -23,9 +23,9 @@ class icinga::web(
   #  notify => Service[$webserver],
   #  owner => root, group => root, mode => 0444;
   #}
-  user::groups::manage_member{"${webserver}-in-icinga-cmd":
+  user::groups::manage_member{"${webserver}-in-icingacmd":
     user => $webserver,
-    group => 'icinga-cmd',
+    group => 'icingacmd',
   }
   class{'php':
     centos_use_remi => true,
