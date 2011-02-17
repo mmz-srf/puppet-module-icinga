@@ -40,7 +40,7 @@ class icinga::pnp4nagios {
       File[
         '/usr/share/icinga-web/app/modules/Cronks/data/xml/grid/icinga-host-template.xml',
         '/usr/share/icinga-web/app/modules/Cronks/data/xml/grid/icinga-service-template.xml',
-        '/usr/share/icinga-web/app/modules/Cronks/config/cronks.xml',
+        '/usr/share/icinga-web/app/modules/Cronks/config/cronks.xml'
       ]
     ]
   }
