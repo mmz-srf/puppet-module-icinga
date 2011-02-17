@@ -26,13 +26,7 @@ class icinga::nrpe(
     owner => root, group => root, mode => 444;
   }
   file{"$nrpe_cfgdir/nrpe.d/default_commands.cfg":
-    source => [
-      "puppet://$server/modules/site-icinga/nrpe/$fqdn/default_commands.cfg.$architecture",
-      "puppet://$server/modules/site-icinga/nrpe/$fqdn/default_commands.cfg",
-      "puppet://$server/modules/site-icinga/nrpe/default_commands.cfg.$architecture",
-      "puppet://$server/modules/site-icinga/nrpe/default_commands.cfg",
-      "puppet://$server/modules/icinga/nrpe/default_commands.cfg.$architecture",
-    ],
+    content => template('modules/icinga/nrpe_commands.cfg.erb'),
     require => File["$nrpe_cfgdir/nrpe.d"],
     notify => Service['nrpe'],
     owner => root, group => root, mode => 444;
