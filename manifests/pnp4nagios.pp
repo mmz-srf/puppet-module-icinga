@@ -19,7 +19,7 @@ class icinga::pnp4nagios {
       ],
       require => Package['pnp4nagios'],
       owner => root, group => root, mode => 0444;
-    '/etc/httpd/vhosts.dpnp4nagios.conf':
+    '/etc/httpd/vhosts.d/pnp4nagios.conf':
       source => [
         "puppet://$server/modules/site-icinga/pnp4nagios/$fqdn/apache.conf",
         "puppet://$server/modules/site-icinga/pnp4nagios/apache.conf",
