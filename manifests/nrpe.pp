@@ -26,7 +26,7 @@ class icinga::nrpe(
     owner => root, group => root, mode => 444;
   }
   file{"$nrpe_cfgdir/nrpe.d/default_commands.cfg":
-    content => template('modules/icinga/nrpe_commands.cfg.erb'),
+    content => template('icinga/nrpe_commands.cfg.erb'),
     require => File["$nrpe_cfgdir/nrpe.d"],
     notify => Service['nrpe'],
     owner => root, group => root, mode => 444;
