@@ -1,5 +1,5 @@
 define icinga::plugin {
-  require icinga::plugins
+  include icinga::plugins
   $libdir = $architecture ? {
     x86_64 => 'lib64',
     default => 'lib',
@@ -9,6 +9,7 @@ define icinga::plugin {
       "puppet://$server/modules/site-icinga/plugins/$name",
       "puppet://$server/modules/icinga/plugins/$name",
     ],
+    require => Package['icinga-plugins-all']
     owner => root, group => root, mode => 0755;
   }
 }
