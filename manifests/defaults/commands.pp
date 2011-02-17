@@ -31,7 +31,7 @@ class icinga::defaults::commands {
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$';
     'check_https_url_regex':
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -e $ARG3$';
-    'check_http_url_string':
+    'check_https_url_string':
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -s $ARG3$';
     'check_https_cert':
       command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
