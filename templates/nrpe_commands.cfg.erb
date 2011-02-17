@@ -1,5 +1,5 @@
-command[check_cpu]=/usr/<%= libdir %>/nagios/plugins/check_cpu -w $ARG1$ -c $ARG2$
-command[check_memory]=/usr/<%= libdir %>/nagios/plugins/check_memory -w $ARG1$ -c $ARG2$
+command[check_cpu]=/usr/<%= libdir %>/nagios/plugins/check_cpu
+command[check_memory]=/usr/<%= libdir %>/nagios/plugins/check_memory
 command[check_procs]=/usr/<%= libdir %>/nagios/plugins/check_procs -w $ARG1$ -c $ARG2$ -s $ARG3$
 command[check_load]=/usr/<%= libdir %>/nagios/plugins/check_load -w $ARG1$ -c $ARG2$
 command[check_disks]=/usr/<%= libdir %>/nagios/plugins/check_disk -w $ARG1$ -c $ARG2$
