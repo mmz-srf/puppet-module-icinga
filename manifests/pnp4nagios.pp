@@ -1,5 +1,5 @@
 class icinga::pnp4nagios {
-  require icinga::web
+  include icinga::web
   package{'pnp4nagios':
     ensure => present,
   }
