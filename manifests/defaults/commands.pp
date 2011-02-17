@@ -15,7 +15,7 @@ class icinga::defaults::commands {
      command_line => '$USER1$/check_dig -H $HOSTADDRESS$ -l $ARG1$';
     'check_ssh':
       command_line => '$USER1$/check_ssh $HOSTADDRESS$';
-    'check_ssh':
+    'check_ssh_port':
       command_line => '$USER1$/check_ssh -p $ARG1$ $HOSTADDRESS$';
     'check_http':
       command_line => '$USER1$/check_http -H $HOSTADDRESS$';
