@@ -34,7 +34,7 @@ class icinga::pnp4nagios {
   }
   exec{'icinga-web_clearcache':
     command => '/usr/share/icinga-web/bin/clearcache.sh',
-    refershonly => true,
+    refreshonly => true,
     require => Package['icinga-web'],
     subscribe => [
       File[
