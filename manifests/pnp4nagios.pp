@@ -1,6 +1,15 @@
 class icinga::pnp4nagios {
+  require icinga::web
   package{'pnp4nagios':
     ensure => present,
+  }
+  nagios_command{'process-service-perfdata':
+    command_line => '/usr/bin/perl /usr/libexec/pnp4nagios/process_perfdata.pl',
+    require => Package['pnp4nagios'],
+  }
+  nagios_command{'process-host-perfdata':
+    command_line => '/usr/bin/perl /usr/libexec/pnp4nagios/process_perfdata.pl -d HOSTPERFDATA',
+    require => Package['pnp4nagios'],
   }
   file{
     '/etc/pnp4nagios/npcd.cfg':
@@ -9,7 +18,7 @@ class icinga::pnp4nagios {
         "puppet://$server/modules/site-icinga/pnp4nagios/npcd.cfg",
         "puppet://$server/modules/icinga/pnp4nagios/npcd.cfg",
       ],
-      require => Package['icinga'],
+      require => Package['pnp4nagios'],
       owner => root, group => root, mode => 0444;
     '/usr/share/icinga-web/app/modules/Cronks/data/xml/grid/icinga-host-template.xml':
       source => "puppet://$server/modules/icinga/pnp4nagios/icinga-host-template.xml",
