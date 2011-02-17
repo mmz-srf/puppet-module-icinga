@@ -9,7 +9,6 @@ define icinga::plugin {
       "puppet://$server/modules/site-icinga/plugins/$name",
       "puppet://$server/modules/icinga/plugins/$name",
     ],
-    require => Package['icinga-plugins-all']
     owner => root, group => root, mode => 0755;
   }
 }
