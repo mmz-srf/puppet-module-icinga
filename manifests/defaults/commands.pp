@@ -1,5 +1,5 @@
 class icinga::defaults::commands {
-  # common service commands
+  # common remote service commands
   nagios_command{
     'check_dummy':
       command_line => '$USER1$/check_dummy $ARG1$';
@@ -11,17 +11,11 @@ class icinga::defaults::commands {
       command_line => '$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$';
     'check_udp':
       command_line => '$USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$';
-    'check_load':
-      command_line => '$USER1$/check_load -w $ARG1$ -c $ARG2';
     'check_dig':
      command_line => '$USER1$/check_dig -H $HOSTADDRESS$ -l $ARG1$';
-    'check_disk':
-      command_line => '$USER1$/check_disk -w $ARG1$ -c $ARG2$ -e -p $ARG3$';
-    'check_all_disks':
-      command_line => '$USER1$/check_disk -w $ARG1$ -c $ARG2$ -e';
     'check_ssh':
       command_line => '$USER1$/check_ssh $HOSTADDRESS$';
-    'check_ssh_port':
+    'check_ssh':
       command_line => '$USER1$/check_ssh -p $ARG1$ $HOSTADDRESS$';
     'check_http':
       command_line => '$USER1$/check_http -H $HOSTADDRESS$';
@@ -33,12 +27,14 @@ class icinga::defaults::commands {
       command_line => '$USER1$/check_http -H $ARG1$ -u $ARG2$ -s $ARG3$';
     'check_https':
       command_line => '$USER1$/check_http --ssl -H $HOSTADDRESS$';
-    'check_https_cert':
-      command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
     'check_https_url':
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$';
     'check_https_url_regex':
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -e $ARG3$';
+    'check_http_url_string':
+      command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -s $ARG3$';
+    'check_https_cert':
+      command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
     'check_mysql':
       command_line => '$USER1$/check_mysql -H $ARG1$ -P $ARG2$ -u $ARG3$ -p $ARG4$';
     'check_mysql_db':
