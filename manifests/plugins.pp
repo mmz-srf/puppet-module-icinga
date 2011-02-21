@@ -1,5 +1,8 @@
 class icinga::plugins {
-  package{'nagios-plugins-all':
+  package{[
+    'perl-Nagios-Plugin',
+    'nagios-plugins-all',
+  ]:
     ensure => present,
   }
   icinga::plugin{[
