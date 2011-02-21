@@ -25,7 +25,6 @@ class icinga::pnp4nagios {
         "puppet://$server/modules/site-icinga/pnp4nagios/apache.conf",
         "puppet://$server/modules/icinga/pnp4nagios/apache.conf",
       ],
-      require => Package['httpd'],
       notify => Package['httpd'],
       owner => root, group => root, mode => 0444;
     '/usr/share/icinga-web/app/modules/Cronks/data/xml/grid/icinga-host-template.xml':
