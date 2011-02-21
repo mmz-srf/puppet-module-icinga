@@ -2,12 +2,12 @@ class icinga::pnp4nagios {
   package{'pnp4nagios':
     ensure => present,
   }
-  nagios_command{'process-service-perfdata':
-    command_line => '/usr/bin/perl /usr/libexec/pnp4nagios/process_perfdata.pl',
+  nagios_command{'process-service-perfdata-file':
+    command_line => '/usr/bin/perl /usr/libexec/pnp4nagios/process_perfdata.pl --bulk=/var/icinga/spool/service-perfdata',
     require => Package['pnp4nagios'],
   }
   nagios_command{'process-host-perfdata':
-    command_line => '/usr/bin/perl /usr/libexec/pnp4nagios/process_perfdata.pl -d HOSTPERFDATA',
+    command_line => '/usr/bin/perl /usr/libexec/pnp4nagios/process_perfdata.pl --bulk=/var/icinga/spool/host-perfdata',
     require => Package['pnp4nagios'],
   }
   file{
