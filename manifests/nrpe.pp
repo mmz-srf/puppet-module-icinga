@@ -11,17 +11,17 @@ class icinga::nrpe(
     default => 'lib',
   }
   require icinga::plugins
-  package{'nagios-nrpe':
+  package{'nrpe':
     ensure => installed,
   }
   file{"$nrpe_cfgdir/nrpe.d":
     ensure => directory,
-    require => Package['nagios-nrpe'],
+    require => Package['nrpe'],
     owner => root, group => root, mode => 555;
   }
   file{"$nrpe_cfgdir/nrpe.cfg":
     content => template('icinga/nrpe.cfg.erb'),
-    require => Package['nagios-nrpe'],
+    require => Package['nrpe'],
     notify => Service['nrpe'],
     owner => root, group => root, mode => 444;
   }
@@ -35,6 +35,6 @@ class icinga::nrpe(
     ensure => running,
     enable => true,
     hasstatus => true,
-    require => Package['nagios-nrpe'],
+    require => Package['nrpe'],
   }
 }
