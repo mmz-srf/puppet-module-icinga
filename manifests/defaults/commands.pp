@@ -58,7 +58,7 @@ class icinga::defaults::commands {
     'check_traceroute_max_hops':
       command_line => 'sudo $USER1$/check_traceroute.pl -H $ARG1$ -R $ARG2$ -N $ARG3$';
     'check_jabber':
-      command_line => '$USER1$/check_jabber -H $ARG1$';
+      command_line => '$USER1$/check_jabber -H $ARG1$ $ARG2$';
   }
 
   # notification commands
