@@ -47,6 +47,10 @@ class icinga::defaults::commands {
       command_line => '$USER1$/check_tcp -p 706 -H $ARG1$';
     'check_smtp':
       command_line => '$USER1$/check_smtp -H $ARG1$';
+    'check_imap':
+      command_line => '$USER1$/check_imap -H $HOSTADDRESS$';
+    'check_pop':
+      command_line => '$USER1$/check_pop -H $HOSTADDRESS$';
     'check_sobby':
       command_line => '$USER1$/check_tcp -H $ARG1$ -p $ARG2$';
     'check_traceroute':
@@ -55,12 +59,6 @@ class icinga::defaults::commands {
       command_line => 'sudo $USER1$/check_traceroute.pl -H $ARG1$ -R $ARG2$ -N $ARG3$';
     'check_jabber':
       command_line => '$USER1$/check_jabber -H $ARG1$';
-    'check_smtp':
-      command_line => '$USER1$/check_jabber -H $HOSTADDRESS$';
-    'check_imap':
-      command_line => '$USER1$/check_imap -H $HOSTADDRESS$';
-    'check_pop':
-      command_line => '$USER1$/check_pop -H $HOSTADDRESS$';
   }
 
   # notification commands
