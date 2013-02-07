@@ -1,17 +1,18 @@
 <VirtualHost *:<%= port %>>
   ServerName <%= servername %>
 
+  AliasMatch /icinga-web/modules/([A-Za-z0-9]*)/resources/styles/([A-Za-z0-9]*\.css)$ /usr/share/icinga-web/app/modules/$1/pub/styles/$2
+  AliasMatch /icinga-web/modules/([A-Za-z0-9]*)/resources/images/([A-Za-z_\-0-9]*\.(png|gif|jpg))$ /usr/share/icinga-web/app/modules/$1/pub/images/$2
+
   Alias /icinga-web/js/ext3 /usr/share/icinga-web/lib/ext3
   Alias /icinga-web /usr/share/icinga-web/pub
-  
-  RewriteEngine On
-  RewriteRule ^/$ https://<%= servername %>/icinga-web
 
   <Directory /usr/share/icinga-web/pub>
     DirectoryIndex index.php
     php_admin_flag engine on
     php_admin_flag safe_mode off
     php_admin_value memory_limit 256M
+    DirectoryIndex index.php
     Options FollowSymLinks
     AllowOverride all
   </Directory>

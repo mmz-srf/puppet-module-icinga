@@ -3,39 +3,26 @@ class icinga::web(
   $servername = 'localhost',
   $port = 80
 ) {
-  require icinga
+  Class['icinga::web'] <- Class['icinga']
+
   package{'icinga-web':
     ensure => present,
   }
-  file{
-    '/usr/share/icinga-web/app/config/databases.xml':
-      source => [
-        "puppet://$server/modules/site-icinga/icinga-web/$fqdn/databases.xml",
-        "puppet://$server/modules/site-icinga/icinga-web/databases.xml",
-        "puppet://$server/modules/icinga/icinga-web/databases.xml",
-      ],
-      require => Package['icinga-web'],
-      notify => Service[$webserver],
-      owner => root, group => root, mode => 0444;
-    '/usr/share/icinga-web/app/modules/Web/config/icinga-io.xml':
-      source => [
-        "puppet://$server/modules/site-icinga/icinga-web/$fqdn/icinga-io.xml",
-        "puppet://$server/modules/site-icinga/icinga-web/icinga-io.xml",
-        "puppet://$server/modules/icinga/icinga-web/icinga-io.xml",
-      ],
-      require => Package['icinga-web'],
-      notify => Service[$webserver],
-      owner => root, group => root, mode => 0444;
-    '/usr/share/icinga-web/app/modules/AppKit/config/auth.xml':
-      source => [
-        "puppet://$server/modules/site-icinga/icinga-web/$fqdn/auth.xml",
-        "puppet://$server/modules/site-icinga/icinga-web/auth.xml",
-        "puppet://$server/modules/icinga/icinga-web/auth.xml",
-      ],
-      require => Package['icinga-web'],
-      notify => Service[$webserver],
-      owner => root, group => root, mode => 0444;
+  file{'/etc/icinga-web':
+    recurse => true,
+    source => [
+      "puppet://$server/modules/site_icinga/icinga-web/$fqdn/",
+      "puppet://$server/modules/site_icinga/icinga-web/",
+      "puppet://$server/modules/icinga/icinga-web",
+    ],
+    require => Package['icinga-web'],
+    notify => Service[$webserver],
+    owner => root, group => root, mode => 0444;
   }
+  #exec{'initialize_database':
+  #  command => ,
+  #  creates => ,
+  #}
   case $webserver {
     'apache': {
       include apache
@@ -61,8 +48,12 @@ class icinga::web(
     group => 'icingacmd',
   }
   class{'php':
-    centos_use_remi => true,
     webserver => $webserver,
+  }
+  if $lsbmajdistrelease == 5 {
+    Class['php']{
+      centos_use_remi => true,
+    }
   }
   include php::extensions::mysql
   include php::extensions::xml

@@ -1,5 +1,5 @@
 class icinga::defaults::contactgroups {
-  nagios_contactgroup{'admins':
+  nagios_contactgroup{'administrators':
     alias => 'Icinga Administrators',
     members => 'root',
   }

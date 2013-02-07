@@ -11,7 +11,8 @@
 #
 
 class icinga(
-  $cfgdir = '/etc/icinga'
+  $cfgdir = '/etc/icinga',
+  $version = latest,
 ) {
   require icinga::plugins
   include icinga::objects
@@ -21,8 +22,17 @@ class icinga(
   }
   package{[
     'icinga',
-    'icinga-api',
     'icinga-idoutils',
+  ]:
+    ensure => $version,
+    notify => [
+      Service['icinga'],
+      Service['ido2db'],
+      Exec['purge_contactgroups'],
+    ],
+  }
+  package{[
+    'icinga-api',
     'libdbi-dbd-mysql',
     'libdbi-dbd-pgsql',
     'nagios-plugins-nrpe',
@@ -42,7 +52,6 @@ class icinga(
   }
   icinga::cfg{[
     'icinga',
-    'cgi',
     'ido2db',
     'idomod',
     'resource',
@@ -53,5 +62,14 @@ class icinga(
       Package['icinga'],
       Package['nagios-plugins-all'],
     ],
+  }
+  # workaround until we got purging behaviour for objects
+  exec{'purge_contactgroups':
+    command => 'rm -f /etc/icinga/objects/contactgroups.cfg',
+    refreshonly => true,
+    before => [
+      Service['icinga'],
+      Class['icinga::objects'],
+    ]
   }
 }

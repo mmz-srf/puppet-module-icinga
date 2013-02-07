@@ -6,7 +6,7 @@ define icinga::plugin {
   }
   file{"/usr/$libdir/nagios/plugins/$name":
     source => [
-      "puppet://$server/modules/site-icinga/plugins/$name",
+      "puppet://$server/modules/site_icinga/plugins/$name",
       "puppet://$server/modules/icinga/plugins/$name",
     ],
     require => Package['nagios-plugins-all'],

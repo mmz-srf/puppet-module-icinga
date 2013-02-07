@@ -13,16 +13,16 @@ class icinga::pnp4nagios {
   file{
     '/etc/pnp4nagios/npcd.cfg':
       source => [
-        "puppet://$server/modules/site-icinga/pnp4nagios/$fqdn/npcd.cfg",
-        "puppet://$server/modules/site-icinga/pnp4nagios/npcd.cfg",
+        "puppet://$server/modules/site_icinga/pnp4nagios/$fqdn/npcd.cfg",
+        "puppet://$server/modules/site_icinga/pnp4nagios/npcd.cfg",
         "puppet://$server/modules/icinga/pnp4nagios/npcd.cfg",
       ],
       require => Package['pnp4nagios'],
       owner => root, group => root, mode => 0444;
     '/etc/httpd/vhosts.d/pnp4nagios.conf':
       source => [
-        "puppet://$server/modules/site-icinga/pnp4nagios/$fqdn/apache.conf",
-        "puppet://$server/modules/site-icinga/pnp4nagios/apache.conf",
+        "puppet://$server/modules/site_icinga/pnp4nagios/$fqdn/apache.conf",
+        "puppet://$server/modules/site_icinga/pnp4nagios/apache.conf",
         "puppet://$server/modules/icinga/pnp4nagios/apache.conf",
       ],
       notify => Service['httpd'],
