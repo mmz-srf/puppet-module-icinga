@@ -42,7 +42,7 @@ class icinga::objects {
   icinga_nagios_symlink{$object_filenames:}
 
   # purge unmanaged resources
-  resource{$object_resourcenames:
+  resources{$object_resourcenames:
     purge => true,
   }
 
