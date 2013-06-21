@@ -2,17 +2,17 @@ class icinga::objects {
   include icinga::defaults
 
   $objects = [
-    'commands',
-    'contacts',
-    'contactgroups',
-    'hosts',
-    'hostextinfos',
-    'hostgroups',
-    'srvices',
-    'servicedependencys',
-    'serviceescalations',
-    'serviceextinfos',
-    'timeperiods',
+    'command',
+    'contact',
+    'contactgroup',
+    'host',
+    'hostextinfo',
+    'hostgroup',
+    'service',
+    'servicedependency',
+    'serviceescalation',
+    'serviceextinfo',
+    'timeperiod',
   ]
   $object_resourcenames = prefix($objects, 'nagios_')
   $object_filenames = suffix($objects, '.cfg')
@@ -36,7 +36,7 @@ class icinga::objects {
     require => Package['icinga'],
     notify  => Service['icinga'],
     owner   => root,
-    group   => root, 
+    group   => root,
     mode    => 0444,
   } ->
   icinga_nagios_symlink{$object_filenames:}
@@ -105,10 +105,7 @@ class icinga::objects {
 
   # purge unmanaged icinga cfg files
   # must be defined after exported resource overrides and cfg file defs
-  file{[
-    "$icinga::cfgdir/objects/",
-    "/etc/nagios/",
-  ]:
+  file{"$icinga::cfgdir/objects/":
     source => "puppet://$server/modules/icinga/empty",
     ensure => directory,
     purge => true,
