@@ -16,7 +16,7 @@ class icinga::objects {
   ]
   $object_resourcenames = prefix($objects, 'nagios_')
   $object_filenames = suffix($objects, '.cfg')
-  $object_pathnames = prefix($object_filenames, "$icinga::/etc/nagios")
+  $object_pathnames = prefix($object_filenames, "$icinga::/etc/nagios/")
 
   define icinga_nagios_symlink {
     file{"$icinga::cfgdir/objects/${name}":
@@ -25,7 +25,7 @@ class icinga::objects {
     }
   }
   
-  file{'/etc/nagios':
+  file{'/etc/nagios/':
     ensure => directory,
     owner  => root,
     group  => root,
