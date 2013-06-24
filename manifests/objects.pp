@@ -19,11 +19,12 @@ class icinga::objects {
   $object_pathnames = prefix($object_filenames, "$icinga::cfgdir/objects/")
 
   define icinga_nagios_symlink {
-    file{"/etc/nagios/${name}":
+    file{"$icinga::cfgdir/objects/${name}":
       ensure => link,
-      target => "$icinga::cfgdir/objects/${name}",
+      target => "/etc/nagios/${name}",
     }
   }
+  
   file{'/etc/nagios':
     ensure => directory,
     owner  => root,
