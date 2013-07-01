@@ -15,21 +15,21 @@ class icinga::objects {
     'timeperiod',
   ]
   $object_resourcenames = prefix($objects, 'nagios_')
-  $object_filenames = suffix($objects, '.cfg')
-  $object_pathnames = prefix($object_filenames, "/etc/nagios/")
+  $object_pathnames = suffix(prefix($objects, '/etc/nagios/nagios_'), '.cfg')
 
   define icinga_nagios_symlink {
-    file{"$icinga::cfgdir/objects/${name}":
+    file{"$icinga::cfgdir/objects/${name}.cfg":
       ensure => link,
-      target => "/etc/nagios/${name}",
+      target => "/etc/nagios/nagios_${name}.cfg",
     }
   }
   
   file{'/etc/nagios/':
-    ensure => directory,
-    owner  => root,
-    group  => root,
-    mode   => 0555,
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+    mode    => 0555,
+    recurse => true,
   } ->
   file{$object_pathnames:
     ensure  => present,
@@ -40,7 +40,7 @@ class icinga::objects {
     group   => root,
     mode    => 0444,
   } ->
-  icinga_nagios_symlink{$object_filenames:}
+  icinga_nagios_symlink{$objects:}
 
   # purge unmanaged resources
   resources{$object_resourcenames:
@@ -102,17 +102,5 @@ class icinga::objects {
   Nagios_timeperiod <||> {
     require => Package['icinga'],
     notify => Service['icinga'],
-  }
-
-  # purge unmanaged icinga cfg files
-  # must be defined after exported resource overrides and cfg file defs
-  file{"$icinga::cfgdir/objects/":
-    source => "puppet://$server/modules/icinga/empty",
-    ensure => directory,
-    purge => true,
-    recurse => true,
-    require => Package['icinga'],
-    notify => Service['icinga'],
-    owner => root, group => root, mode => 0555;
   }
 }
