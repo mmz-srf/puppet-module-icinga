@@ -40,7 +40,9 @@ class icinga::objects {
     group   => root,
     mode    => 0444,
   } ->
-  icinga_nagios_symlink{$objects:}
+  icinga_nagios_symlink{$objects:
+    before => Service['icinga']
+  }
 
   # purge unmanaged resources
   resources{$object_resourcenames:
