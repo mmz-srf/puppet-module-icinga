@@ -10,7 +10,12 @@
                                         
                                         http://www.doctrine-project.org/documentation/manual/1_1/en/introduction-to-connections
                                 -->
-                                <ae:parameter name="dsn">mysql://icinga_web:icinga_web@localhost:3306/icinga_web</ae:parameter>
+                                <% database = scope.lookupvar('icinga::web::dbconf::database') -%>
+                                <% username = scope.lookupvar('icinga::web::dbconf::username') -%>
+                                <% password = scope.lookupvar('icinga::web::dbconf::password') -%>
+                                <% hostname = scope.lookupvar('icinga::web::dbconf::hostname') -%>
+                                <% port     = scope.lookupvar('icinga::web::dbconf::port')     -%>
+                                <ae:parameter name="dsn">mysql://<%= "#{usename}:#{password}@#{host}:#{port}/#{database}" -%></ae:parameter>
 
                                 <!-- Generic credentials  -->
                                 <!-- <ae:parameter name="username">icinga_web</ae:parameter> -->
