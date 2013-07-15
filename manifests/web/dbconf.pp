@@ -18,7 +18,10 @@ class icinga::web::dbconf (
     group   => apache,
     mode    => '0640',
     require => Package['icinga-web'],
-    notify  => Service['apache']
+    notify  => [
+      Exec['icinga_web_clearcache'],
+      Service['apache']
+    }
   }
 
 }

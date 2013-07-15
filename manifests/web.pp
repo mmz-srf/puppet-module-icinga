@@ -55,6 +55,11 @@ class icinga::web(
       centos_use_remi => true,
     }
   }
+  # clear webcache
+  exec{'icinga_web_clearcache':
+    command     => '/usr/bin/icinga-web-clearcache',
+    refreshonly => true,
+  }
   include php::extensions::mysql
   include php::extensions::xml
   include php::extensions::xmlrpc
