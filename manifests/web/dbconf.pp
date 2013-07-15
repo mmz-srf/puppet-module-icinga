@@ -7,7 +7,7 @@ class icinga::web::dbconf (
   $port     = '3306'
 ){
 
-  file{'/etc/icinga-web/databases.xml':
+  file{'/etc/icinga-web/conf.d/databases.xml':
     content => template('icinga/icinga-web/databases.xml.erb'),
     owner   => root,
     group   => apache,
