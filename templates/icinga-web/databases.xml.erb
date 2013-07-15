@@ -15,7 +15,7 @@
                                 <% password = scope.lookupvar('icinga::web::dbconf::password') -%>
                                 <% hostname = scope.lookupvar('icinga::web::dbconf::hostname') -%>
                                 <% port     = scope.lookupvar('icinga::web::dbconf::port')     -%>
-                                <ae:parameter name="dsn">mysql://<%= "#{username}:#{password}@#{host}:#{port}/#{database}" -%></ae:parameter>
+                                <ae:parameter name="dsn">mysql://<%= "#{username}:#{password}@#{hostname}:#{port}/#{database}" -%></ae:parameter>
 
                                 <!-- Generic credentials  -->
                                 <!-- <ae:parameter name="username">icinga_web</ae:parameter> -->
