@@ -29,6 +29,7 @@ class icinga::objects {
     "${icinga::cfgdir}/objects/commands.cfg",
     "${icinga::cfgdir}/objects/ido2db_check_proc.cfg",
     "${icinga::cfgdir}/objects/localhost.cfg",
+    "${icinga::cfgdir}/objects/notifications.cfg",
     "${icinga::cfgdir}/objects/timeperiods.cfg",
     "${icinga::cfgdir}/objects/windows.cfg",
     "${icinga::cfgdir}/objects/printer.cfg", 
