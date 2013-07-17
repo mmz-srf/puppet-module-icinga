@@ -23,6 +23,18 @@ class icinga::objects {
       target => "/etc/nagios/nagios_${name}.cfg",
     }
   }
+
+  # remove icinga example conf files in objects dir
+  file{[
+    "${icinga::cfgdir}/objects/commands.cfg",
+    "${icinga::cfgdir}/objects/ido2db_check_proc.cfg",
+    "${icinga::cfgdir}/objects/localhost.cfg",
+    "${icinga::cfgdir}/objects/timeperiods.cfg",
+    "${icinga::cfgdir}/objects/windows.cfg",
+    "${icinga::cfgdir}/objects/printer.cfg", 
+    "${icinga::cfgdir}/objects/switch.cfg" ]:
+    ensure => absent,
+  }
   
   file{'/etc/nagios/':
     ensure  => directory,
