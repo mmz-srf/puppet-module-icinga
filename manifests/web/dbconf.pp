@@ -21,7 +21,7 @@ class icinga::web::dbconf (
     notify  => [
       Exec['icinga_web_clearcache'],
       Service['apache']
-    }
+    ]
   }
 
 }
