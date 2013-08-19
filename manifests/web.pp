@@ -16,7 +16,7 @@ class icinga::web(
       "puppet://$server/modules/icinga/icinga-web",
     ],
     require => Package['icinga-web'],
-    notify => Service[$webserver],
+    notify => Class[$webserver],
     owner => root, group => root, mode => 0444;
   }
   #exec{'initialize_database':
@@ -40,7 +40,7 @@ class icinga::web(
     content => template("icinga/icinga-web/webserver-conf.$webserver.erb"),
     path => $webserver_conf,
     require => Package['icinga-web'],
-    notify => Service[$webserver],
+    notify => Class[$webserver],
     owner => root, group => root, mode => 0444;
   }
   user::groups::manage_member{"${webserver}-in-icingacmd":

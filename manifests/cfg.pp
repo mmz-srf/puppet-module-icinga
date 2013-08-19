@@ -1,9 +1,10 @@
 define icinga::cfg() {
-  file{"$icinga::cfgdir/$name.cfg":
+  file{"${::icinga::cfgdir}/${name}.cfg":
     source => [
-      "puppet://$server/modules/site_icinga/core/$fqdn/$name.cfg",
-      "puppet://$server/modules/site_icinga/core/$name.cfg",
-      "puppet://$server/modules/icinga/core/$name.cfg",
+      "puppet:///modules/site_icinga/core/${::fqdn}/${name}.cfg",
+      "puppet:///modules/site_icinga/core/${name}.cfg",
+      "puppet:///modules/icinga/core/${::osfamily}/${name}.cfg",
+      "puppet:///modules/icinga/core/${name}.cfg",
     ],
     require => [
       Package['icinga'],

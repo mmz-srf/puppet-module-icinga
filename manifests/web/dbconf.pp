@@ -20,7 +20,7 @@ class icinga::web::dbconf (
     require => Package['icinga-web'],
     notify  => [
       Exec['icinga_web_clearcache'],
-      Service['apache']
+      Class['apache']
     ]
   }
 

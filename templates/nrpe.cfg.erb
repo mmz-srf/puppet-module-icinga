@@ -23,7 +23,7 @@ log_facility=daemon
 # number.  The file is only written if the NRPE daemon is started by the root
 # user and is running in standalone mode.
 
-pid_file=/var/run/nrpe.pid
+pid_file=<%= nrpe_pid %>
 
 
 
@@ -51,7 +51,7 @@ server_port=5666
 # 
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-nrpe_user=nrpe
+nrpe_user=<%= nrpe_user %>
 
 
 
@@ -61,7 +61,7 @@ nrpe_user=nrpe
 # 
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-nrpe_group=nnrpe
+nrpe_group=<%= nrpe_group %>
 
 
 

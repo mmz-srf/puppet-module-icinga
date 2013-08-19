@@ -15,28 +15,57 @@ class icinga::objects {
     'timeperiod',
   ]
   $object_resourcenames = prefix($objects, 'nagios_')
-  $object_pathnames = suffix(prefix($objects, '/etc/nagios/nagios_'), '.cfg')
+  $object_pathnames_puppet = suffix(prefix($objects, '/etc/nagios/nagios_'), '.cfg')
+  $object_pathnames_icinga = $::osfamily ? {
+    'debian'  => suffix(prefix($objects, "$::icinga::cfgdir/objects/"), '_icinga.cfg'),
+    'redhat'  => suffix(prefix($objects, "$::icinga::cfgdir/objects/"), '.cfg'),
+  }
 
   define icinga_nagios_symlink {
-    file{"$icinga::cfgdir/objects/${name}.cfg":
+    $object_pathname_icinga = $::osfamily ? {
+      'debian'  => "$::icinga::cfgdir/objects/${name}_icinga.cfg",
+      'redhat'  => "$::icinga::cfgdir/objects/${name}.cfg",
+    } 
+    file{$object_pathname_icinga:
       ensure => link,
       target => "/etc/nagios/nagios_${name}.cfg",
     }
   }
 
   # remove icinga example conf files in objects dir
-  file{[
-    "${icinga::cfgdir}/objects/commands.cfg",
-    "${icinga::cfgdir}/objects/ido2db_check_proc.cfg",
-    "${icinga::cfgdir}/objects/localhost.cfg",
-    "${icinga::cfgdir}/objects/notifications.cfg",
-    "${icinga::cfgdir}/objects/timeperiods.cfg",
-    "${icinga::cfgdir}/objects/windows.cfg",
-    "${icinga::cfgdir}/objects/printer.cfg", 
-    "${icinga::cfgdir}/objects/switch.cfg" ]:
-    ensure => absent,
+  case $::osfamily {
+    'redhat': {
+      file{[
+        "$::icinga::cfgdir/objects/commands.cfg",
+        "$::icinga::cfgdir/objects/ido2db_check_proc.cfg",
+        "$::icinga::cfgdir/objects/localhost.cfg",
+        "$::icinga::cfgdir/objects/notifications.cfg",
+        "$::icinga::cfgdir/objects/timeperiods.cfg",
+        "$::icinga::cfgdir/objects/windows.cfg",
+        "$::icinga::cfgdir/objects/printer.cfg",
+        "$::icinga::cfgdir/objects/switch.cfg",
+      ]:
+        ensure => absent,
+      } 
+    }
+    'debian': {
+      file{[
+        "$::icinga::cfgdir/objects/contacts_icinga.cfg",
+        "$::icinga::cfgdir/objects/extinfo_icinga.cfg",
+        "$::icinga::cfgdir/objects/services_icinga.cfg",
+        "$::icinga::cfgdir/objects/hostgroups_icinga.cfg",
+        "$::icinga::cfgdir/objects/localhost_icinga.cfg",
+        "$::icinga::cfgdir/objects/ido2db_check_proc.cfg",
+        "$::icinga::cfgdir/objects/timeperiods_icinga.cfg",
+        "$::icinga::cfgdir/objects/generic-host_icinga.cfg",
+        "$::icinga::cfgdir/objects/generic-service_icinga.cfg",
+      ]:
+        ensure => absent,
+      } 
+    }
   }
-  
+
+
   file{'/etc/nagios/':
     ensure  => directory,
     owner   => root,
@@ -44,7 +73,7 @@ class icinga::objects {
     mode    => 0555,
     recurse => true,
   } ->
-  file{$object_pathnames:
+  file{$object_pathnames_puppet:
     ensure  => present,
     replace => false,
     require => Package['icinga'],
