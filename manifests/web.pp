@@ -26,7 +26,10 @@ class icinga::web(
   case $webserver {
     'apache': {
       include apache
-      $webserver_conf = '/etc/httpd/conf.d/icinga-web.conf'
+      $webserver_conf = $::osfamily ? { 
+        'debian' => '/etc/apache2/conf.d/icinga-web.conf',
+        'redhat' => '/etc/httpd/conf.d/icinga-web.conf',
+      }
     }
     'nginx': {
       include nginx::spawn-fcgi
@@ -40,12 +43,18 @@ class icinga::web(
     content => template("icinga/icinga-web/webserver-conf.$webserver.erb"),
     path => $webserver_conf,
     require => Package['icinga-web'],
-    notify => Class[$webserver],
+    notify => Service['httpd'],
     owner => root, group => root, mode => 0444;
   }
   user::groups::manage_member{"${webserver}-in-icingacmd":
-    user => $webserver,
-    group => 'icingacmd',
+    user => $::osfamily ? { 
+        'debian' => 'www-data',
+        'redhat' => $webserver,
+      },
+    group => $::osfamily ? { 
+        'debian' => 'nagios',
+        'redhat' => 'icingacmd',
+      }
   }
   class{'php':
     webserver => $webserver,

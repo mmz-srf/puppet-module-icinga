@@ -15,12 +15,15 @@ class icinga::web::dbconf (
   file{'/etc/icinga-web/conf.d/databases.xml':
     content => template('icinga/icinga-web/databases.xml.erb'),
     owner   => root,
-    group   => apache,
+    group   => $::osfamily ? { 
+      'debian' => 'www-data',
+      'redhat' => 'apache',
+    },
     mode    => '0640',
     require => Package['icinga-web'],
     notify  => [
       Exec['icinga_web_clearcache'],
-      Class['apache']
+      Service['httpd']
     ]
   }
 
