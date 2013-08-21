@@ -3,11 +3,19 @@ class icinga::web(
   $servername = 'localhost',
   $port = 80
 ) {
+  Class['icinga::web'] <- Class['icinga::package']
   Class['icinga::web'] <- Class['icinga']
 
   package{'icinga-web':
     ensure => present,
+  }->
+  augeas { 'enable_ido2db':
+    changes => [
+      "set /files/etc/default/icinga/IDO2DB yes",
+    ],
+    onlyif => "match /files/etc/default/icinga/IDO2DB[. = 'yes'] size == 0"
   }
+
   file{'/etc/icinga-web':
     recurse => true,
     source => [
@@ -19,10 +27,7 @@ class icinga::web(
     notify => Class[$webserver],
     owner => root, group => root, mode => 0444;
   }
-  #exec{'initialize_database':
-  #  command => ,
-  #  creates => ,
-  #}
+
   case $webserver {
     'apache': {
       class {'::apache':
@@ -37,7 +42,12 @@ class icinga::web(
         'debian' => '/etc/apache2/conf.d/icinga-web.conf',
         'redhat' => '/etc/httpd/conf.d/icinga-web.conf',
       }
+      file { '/var/lib/icinga/rw':
+        ensure => directory,
+        mode   => 0755,
+      }
     }
+
     'nginx': {
       include nginx::spawn-fcgi
       $webserver_conf = '/etc/nginx/conf.d/icinga-web.conf'
@@ -47,7 +57,7 @@ class icinga::web(
     }
   }
   file{'webserver-config':
-    content => template("icinga/icinga-web/webserver-conf.$webserver.{$::osfamily}.erb"),
+    content => template("icinga/icinga-web/webserver-conf.$webserver.${::osfamily}.erb"),
     path => $webserver_conf,
     require => Package['icinga-web'],
     notify => Service['httpd'],
@@ -55,13 +65,13 @@ class icinga::web(
   }
   user::groups::manage_member{"${webserver}-in-icingacmd":
     user => $::osfamily ? { 
-        'debian' => 'www-data',
-        'redhat' => $webserver,
-      },
+      'debian' => 'www-data',
+      'redhat' => $webserver,
+    },
     group => $::osfamily ? { 
-        'debian' => 'nagios',
-        'redhat' => 'icingacmd',
-      }
+      'debian' => 'nagios',
+      'redhat' => 'icingacmd',
+    }
   }
   class{'php':
     webserver => $webserver,
