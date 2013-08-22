@@ -10,15 +10,14 @@ class icinga::package {
     ],
   } 
   case $::osfamily {
-  	'redhat': {
-  		include ::icinga::package::redhat
-  	}
-  	'debian': {
-  		include ::icinga::package::debian
-  	}
-  	default: {
-  		fail("Operting System not suported : $osfamily")
-  	}
+    'RedHat': {
+      include ::icinga::package::redhat
+    }
+    'Debian': {
+      include ::icinga::package::debian
+    }
+    default: {
+      fail("Operting System not suported : $osfamily")
+    }
   }
-
 }

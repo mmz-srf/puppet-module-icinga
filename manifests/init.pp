@@ -14,6 +14,10 @@ class icinga(
   $cfgdir = '/etc/icinga',
   $version = latest,
 ) {
+  if defined (Class['::icinga::target']) {
+    Class['icinga'] <- Class['::icinga::target']
+  }
+
   include icinga::objects
   $libdir = $architecture ? {
     x86_64 => 'lib64',
@@ -49,8 +53,4 @@ class icinga(
       ],
     }
   }
-  icinga::plugin{[
-    'check_cpu',
-    'check_memory',
-  ]:}
 }
