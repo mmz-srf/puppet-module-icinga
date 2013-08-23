@@ -3,6 +3,7 @@ define icinga::plugin {
     x86_64 => 'lib64',
     default => 'lib',
   }
+  include ::icinga::plugins
   file{"/usr/$libdir/nagios/plugins/$name":
     source => [
       "puppet://$server/modules/site_icinga/plugins/$name",

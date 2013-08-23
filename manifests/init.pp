@@ -18,12 +18,13 @@ class icinga(
     Class['icinga'] <- Class['::icinga::target']
   }
 
-  include icinga::objects
   $libdir = $architecture ? {
     x86_64 => 'lib64',
     default => 'lib',
   }
-  
+
+  include icinga::objects
+  include ::icinga::plugins
   include ::icinga::package
 
   service{[

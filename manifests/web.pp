@@ -4,7 +4,6 @@ class icinga::web(
   $port = 80
 ) {
   Class['icinga::web'] <- Class['icinga::package']
-  Class['icinga::web'] <- Class['icinga']
 
   package{'icinga-web':
     ensure => present,
@@ -83,7 +82,10 @@ class icinga::web(
   }
   # clear webcache
   exec{'icinga_web_clearcache':
-    command     => '/usr/bin/icinga-web-clearcache',
+    command    => $::osfamily ? { 
+      'debian' => '/usr/lib/icinga-web/bin/clearcache.sh',
+      'redhat' => '/usr/bin/icinga-web-clearcache',
+    },
     refreshonly => true,
   }
   include php::extensions::mysql

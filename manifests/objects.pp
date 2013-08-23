@@ -46,6 +46,8 @@ class icinga::objects {
         "$::icinga::cfgdir/objects/switch.cfg",
       ]:
         ensure => absent,
+        require => Package['icinga'],
+        before => Service['icinga'],
       } 
     }
     'debian': {
@@ -61,6 +63,8 @@ class icinga::objects {
         "$::icinga::cfgdir/objects/generic-service_icinga.cfg",
       ]:
         ensure => absent,
+        require => Package['icinga'],
+        before => Service['icinga'],
       } 
     }
   }

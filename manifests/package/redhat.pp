@@ -8,8 +8,4 @@ class icinga::package::debian {
   ]:
     ensure => present,
   }
-  package{'nagios-plugins':
-    name => 'nagios-plugins-all'
-    ensure => present,
-  }
 }
