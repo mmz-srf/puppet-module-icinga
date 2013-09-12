@@ -15,18 +15,20 @@ class icinga::web(
     onlyif => "match /files/etc/default/icinga/IDO2DB[. = 'yes'] size == 0"
   }
 
- # Debian dont need this block. does not make any sense to me
- # file{'/etc/icinga-web':
- #   recurse => true,
- #   source => [
- #     "puppet://$server/modules/site_icinga/icinga-web/$fqdn/",
- #     "puppet://$server/modules/site_icinga/icinga-web/",
- #     "puppet://$server/modules/icinga/icinga-web",
- #   ],
- #   require => Package['icinga-web'],
- #   notify => Class[$webserver],
- #   owner => root, group => root, mode => 0444;
- # }
+  if $::osfamily == 'redhat' {
+    # Debian dont need this block. does not make any sense to me
+    file{'/etc/icinga-web':
+      recurse => true,
+      source => [
+        "puppet://$server/modules/site_icinga/icinga-web/$fqdn/",
+        "puppet://$server/modules/site_icinga/icinga-web/",
+        "puppet://$server/modules/icinga/icinga-web",
+      ],
+      require => Package['icinga-web'],
+      notify => Class[$webserver],
+      owner => root, group => root, mode => 0444;
+    }
+  }
 
   case $webserver {
     'apache': {
