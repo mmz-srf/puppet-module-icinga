@@ -53,5 +53,9 @@ class icinga(
         Package['nagios-plugins'],
       ],
     }
+    file{'/var/icinga':
+      ensure => link,
+      target => '/var/spool/icinga',
+    }
   }
 }
