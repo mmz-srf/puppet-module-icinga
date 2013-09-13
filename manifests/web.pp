@@ -32,13 +32,18 @@ class icinga::web(
 
   case $webserver {
     'apache': {
-      class {'::apache':
-        keepalive    => 'On',
-        default_mods => true,
-        mpm_module   => "prefork", # needed to instal mod libapache2-mod-php5
+      if $::osfamily == 'debian' {
+        # could not find this module used by srf.
+        class {'::apache':
+          keepalive    => 'On',
+          default_mods => true,
+          mpm_module   => "prefork", # needed to instal mod libapache2-mod-php5
+        }
+        include ::apache::mod::php
+        include ::apache::mod::rewrite
+      } else {
+        include apache
       }
-      include ::apache::mod::php
-      include ::apache::mod::rewrite
 
       $webserver_conf = $::osfamily ? { 
         'debian' => '/etc/apache2/conf.d/icinga-web.conf',
