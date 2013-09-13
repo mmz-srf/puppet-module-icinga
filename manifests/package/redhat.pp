@@ -1,4 +1,4 @@
-class icinga::package::debian {
+class icinga::package::redhat {
   package{[
     'icinga-api',
     'libdbi-dbd-mysql',
