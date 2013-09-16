@@ -41,6 +41,11 @@ class icinga::web(
         }
         include ::apache::mod::php
         include ::apache::mod::rewrite
+
+        file { '/var/lib/icinga/rw':
+          ensure => directory,
+          mode   => 0755,
+        }
       } else {
         include apache
       }
@@ -48,10 +53,6 @@ class icinga::web(
       $webserver_conf = $::osfamily ? { 
         'debian' => '/etc/apache2/conf.d/icinga-web.conf',
         'redhat' => '/etc/httpd/conf.d/icinga-web.conf',
-      }
-      file { '/var/lib/icinga/rw':
-        ensure => directory,
-        mode   => 0755,
       }
     }
 
