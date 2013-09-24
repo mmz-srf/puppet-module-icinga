@@ -39,7 +39,7 @@ class icinga::web(
           default_mods => true,
           mpm_module   => "prefork", # needed to instal mod libapache2-mod-php5
         }
-        include ::apache::mod::php
+        #include ::apache::mod::php is insalled automatically when preforked
         include ::apache::mod::rewrite
 
         file { '/var/lib/icinga/rw':
