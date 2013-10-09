@@ -1,5 +1,5 @@
 define icinga::plugin(
-  source_module => 'icinga',
+  $source_module = 'icinga',
 ) {
   $libdir = $architecture ? {
     x86_64 => 'lib64',
@@ -12,4 +12,3 @@ define icinga::plugin(
     owner => root, group => root, mode => 0755;
   }
 }
- 
