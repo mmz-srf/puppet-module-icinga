@@ -7,7 +7,7 @@ define icinga::plugin(
   }
   include ::icinga::plugins
   file{"/usr/$libdir/nagios/plugins/$name":
-    source => "puppet://$server/modules/${source_module}/plugins/${name}",
+    source => "puppet://$server/modules/${source_module}/icinga-plugins/${name}",
     require => Package['nagios-plugins'],
     owner => root, group => root, mode => 0755;
   }

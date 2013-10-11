@@ -17,49 +17,41 @@ class icinga::nrpe(
     'debian' => 'nagios',
     'redhat' => 'nrpe',
   },
-) {
-
   $libdir = $::osfamily ? { 
     'debian' => 'lib',
     'redhat' => $architecture ? {
-      x86_64 => 'lib64',
+      x86_64  => 'lib64',
       default => 'lib',
     },
-  }
-
+  },
+) {
   package{'nrpe':
     ensure => installed,
     name   => $::osfamily ? { 
-        'debian' => 'nagios-nrpe-server',
-        'redhat' => 'nrpe',
+      'debian' => 'nagios-nrpe-server',
+      'redhat' => 'nrpe',
     }
-  }
-
+  } ->
   file{"$nrpe_cfgdir/nrpe.d":
     ensure => directory,
-    require => Package['nrpe'],
-    owner => root, group => root, mode => 555;
-  }
+    owner  => root,
+    group  => root,
+    mode   => '0555',
+  } ->
   file{"$nrpe_cfgdir/nrpe.cfg":
     content => template('icinga/nrpe.cfg.erb'),
-    require => Package['nrpe'],
-    notify => Service['nrpe'],
-    owner => root, group => root, mode => 444;
-  }
-  file{"$nrpe_cfgdir/nrpe.d/default_commands.cfg":
-    content => template('icinga/nrpe_commands.cfg.erb'),
-    require => File["$nrpe_cfgdir/nrpe.d"],
-    notify => Service['nrpe'],
-    owner => root, group => root, mode => 444;
-  }
+    notify  => Service['nrpe'],
+    owner   => root, group => root, mode => 444;
+  } ~>
+  icinga::nrpe::command{'default_commands':
+  } ~>
   service{'nrpe':
-    ensure => running,
-    enable => true,
+    ensure    => running,
+    enable    => true,
     hasstatus => true,
-    require => Package['nrpe'],
-    name   => $::osfamily ? { 
-        'debian' => 'nagios-nrpe-server',
-        'redhat' => 'nrpe',
+    name      => $::osfamily ? { 
+      'debian' => 'nagios-nrpe-server',
+      'redhat' => 'nrpe',
     }
   }
 }
