@@ -25,7 +25,6 @@ class icinga::nrpe(
     },
   },
 ) {
-  include ::icinga::nrpe::default_comands
 
   package{'nrpe':
     ensure => installed,

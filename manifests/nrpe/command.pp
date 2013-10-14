@@ -4,7 +4,7 @@ define icinga::nrpe::command(
 ) {
   file{"${::icinga::nrpe::nrpe_cfgdir}/nrpe.d/${name}.cfg":
     content => template('icinga/nrpe_command.cfg.erb'),
-    require => Class['::icinga::nrpe'],
+    #require => Class['::icinga::nrpe'],
     notify  => Service['nrpe'],
     owner   => root,
     group   => root,
