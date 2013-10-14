@@ -25,7 +25,7 @@ class icinga::nrpe(
     },
   },
 ) {
-  inlcude ::icinga::nrpe::default_comands
+  include ::icinga::nrpe::default_comands
 
   package{'nrpe':
     ensure => installed,
@@ -43,7 +43,9 @@ class icinga::nrpe(
   file{"$nrpe_cfgdir/nrpe.cfg":
     content => template('icinga/nrpe.cfg.erb'),
     notify  => Service['nrpe'],
-    owner   => root, group => root, mode => 444;
+    owner   => root,
+    group   => root,
+    mode    => 444,
   } ~>
   icinga::nrpe::command{[
     'check_cpu',
@@ -60,7 +62,7 @@ class icinga::nrpe(
       command => 'check_disk -w $ARG1$ -c $ARG2$';
     'check_proc':
       command => 'check_procs -w $ARG1$ -c $ARG2$ -C $ARG3$';
-    'check_procs'
+    'check_procs':
       command => 'check_procs -w $ARG1$ -c $ARG2$ -s $ARG3$';
   } ~>
   service{'nrpe':
