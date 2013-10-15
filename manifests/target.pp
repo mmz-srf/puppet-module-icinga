@@ -1,9 +1,12 @@
 class icinga::target(
   $use = 'generic-host'
-) {  
+) {
+
   if defined (Class['::icinga']) {
     Class['::icinga'] <- Class['::icinga::target']
   }
+
+  include ::icinga::plugins
 
   @@nagios_host{$fqdn:
     address => $ipaddress,
