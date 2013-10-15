@@ -1,5 +1,5 @@
 define icinga::plugin(
-  $source_module = 'icinga',
+  $source_module = $caller_module_name,
 ) {
   $libdir = $architecture ? {
     x86_64 => 'lib64',
