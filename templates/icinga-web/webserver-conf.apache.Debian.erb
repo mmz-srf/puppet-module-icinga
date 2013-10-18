@@ -1,5 +1,8 @@
 <VirtualHost *:80>
 	ServerName monitor.loc.serv.development.srf.mpc
+	
+	RewriteEngine on
+	RewriteRule   ^/$  /icinga-web  [R]
 
 	#
 	# icinga-web apache configuration
