@@ -54,8 +54,9 @@ class icinga(
       ],
     }
     file{'/var/icinga':
-      ensure => link,
-      target => '/var/spool/icinga',
+      replace => 'no',
+      ensure  => link,
+      target  => '/var/spool/icinga',
     }
   }
 }
