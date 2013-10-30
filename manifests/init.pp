@@ -57,6 +57,10 @@ class icinga(
       replace => 'no',
       ensure  => link,
       target  => '/var/spool/icinga',
+      recurse => true,
+      owner => 'icinga',
+      group => 'icinga',
+      mode => 755,
     }
   }
 }
