@@ -32,8 +32,8 @@ class icinga(
     'ido2db',
   ]:
     hasstatus => true,
-    ensure => running,
-    enable => true,
+    ensure    => running,
+    enable    => true,
   }
   Service['icinga']{
     require => Service['ido2db'],
@@ -47,7 +47,7 @@ class icinga(
 
   if $::osfamily == 'redhat' {
     file{'/usr/share/icinga/plugins':
-      ensure => "/usr/$libdir/nagios/plugins",
+      ensure  => "/usr/$libdir/nagios/plugins",
       require => [
         Package['icinga'],
         Package['nagios-plugins'],
@@ -57,10 +57,9 @@ class icinga(
       replace => 'no',
       ensure  => link,
       target  => '/var/spool/icinga',
-      recurse => true,
-      owner => 'icinga',
-      group => 'icinga',
-      mode => 755,
+    } ->
+    exec { '/bin/chown -R icinga:icinga /var/icinga/*':
+      require => Package['icinga'],
     }
   }
 }
