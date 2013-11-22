@@ -57,9 +57,6 @@ class icinga(
       replace => 'no',
       ensure  => link,
       target  => '/var/spool/icinga',
-    } ->
-    exec { '/bin/chown -R icinga:icinga /var/icinga/*':
-      require => Package['icinga'],
     }
   }
 }
