@@ -8,6 +8,7 @@ class icinga::objects {
     'host',
     'hostextinfo',
     'hostgroup',
+    'servicegroup',
     'service',
     'servicedependency',
     'serviceescalation',
@@ -102,6 +103,7 @@ class icinga::objects {
   Nagios_hostextinfo <<||>>
   Nagios_hostgroup <<||>>
   Nagios_service <<||>>
+  Nagios_servicegroup <<||>>
   Nagios_servicedependency <<||>>
   Nagios_serviceescalation <<||>>
   Nagios_serviceextinfo <<||>>
@@ -128,6 +130,10 @@ class icinga::objects {
     notify => Service['icinga'],
   }
   Nagios_hostgroup <||> {
+    require => Package['icinga'],
+    notify => Service['icinga'],
+  }
+  Nagios_servicegroup <||> {
     require => Package['icinga'],
     notify => Service['icinga'],
   }
