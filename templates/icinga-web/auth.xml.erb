@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+
+	<setting name="defaults">
+	<!--
+		<ae:parameter name="auth_create">false</ae:parameter>
+		<ae:parameter name="auth_update">false</ae:parameter>
+		<ae:parameter name="auth_resume">true</ae:parameter>
+		<ae:parameter name="auth_groups">icinga_user</ae:parameter>
+		<ae:parameter name="auth_enable">false</ae:parameter>
+		<ae:parameter name="auth_authoritative">false</ae:parameter>
+	-->
+	</setting>
+
+	<setting name="provider">
+<% ldap_enabled = scope.lookupvar('icinga::web::ldapconf::ldap_enabled') %>
+<% if ldap_enabled %>
+
+<% ldap_dsn         = scope.lookupvar('icinga::web::ldapconf::ldap_dns') %>
+<% ldap_start_tls   = scope.lookupvar('icinga::web::ldapconf::ldap_start_tls') %>
+<% ldap_basedn      = scope.lookupvar('icinga::web::ldapconf::ldap_basedn') %>
+<% ldap_binddn      = scope.lookupvar('icinga::web::ldapconf::ldap_binddn') %>
+<% ldap_bindpw      = scope.lookupvar('icinga::web::ldapconf::ldap_bindpw') %>
+<% ldap_userattr    = scope.lookupvar('icinga::web::ldapconf::ldap_userattr') %>
+<% ldap_filter_user = scope.lookupvar('icinga::web::ldapconf::ldap_filter_user') %>
+
+		<ae:parameter name="openldap-ldap1">
+			<ae:parameter name="auth_module">AppKit</ae:parameter>
+			<ae:parameter name="auth_provider">Auth.Provider.LDAP</ae:parameter>
+			<ae:parameter name="auth_enable">true</ae:parameter>
+			<ae:parameter name="auth_authoritative">false</ae:parameter>
+			<ae:parameter name="auth_create">true</ae:parameter>
+			<ae:parameter name="auth_update">true</ae:parameter>
+			<ae:parameter name="auth_map">
+				<ae:parameter name="user_firstname">givenName</ae:parameter>
+				<ae:parameter name="user_lastname">sn</ae:parameter>
+				<ae:parameter name="user_email">mail</ae:parameter> 
+			</ae:parameter>
+			<ae:parameter name="ldap_dsn"><%= ldap_dsn %></ae:parameter>
+            <ae:parameter name="ldap_start_tls"><%= ldap_start_tls %></ae:parameter>
+			<ae:parameter name="ldap_basedn"><%= ldap_basedn %></ae:parameter>
+			<ae:parameter name="ldap_binddn"><%= ldap_binddn %></ae:parameter>
+			<ae:parameter name="ldap_bindpw"><![CDATA[<%= ldap_bindpw  %>]]></ae:parameter>
+			<ae:parameter name="ldap_userattr"><%= ldap_userattr %></ae:parameter>
+			<ae:parameter name="ldap_filter_user"><![CDATA[<%= ldap_filter_user %>]]></ae:parameter>
+		</ae:parameter>
+<% end %>
+	</setting>
+
+	<setting name="message">
+	<!--
+		<ae:parameter name="show">true</ae:parameter>
+		<ae:parameter name="title">¡Hola</ae:parameter>
+		<ae:parameter name="text">Soy no persona muy importante</ae:parameter>
+		<ae:parameter name="include_file"></ae:parameter>
+		<ae:parameter name="expand_first">false</ae:parameter>
+	-->
+	</setting>
+	
+</settings>
