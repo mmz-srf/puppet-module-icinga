@@ -4,7 +4,6 @@ class icinga::package::redhat {
     'libdbi-dbd-mysql',
     'libdbi-dbd-pgsql',
     'nagios-plugins-nrpe',
-    'perl-Nagios-Plugin',
   ]:
     ensure => present,
   }
