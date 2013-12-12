@@ -22,4 +22,13 @@ class icinga::target(
     'check_cpu',
     'check_memory',
   ]:}
+
+  case $osfamily {
+    'RedHat': {
+      icinga::plugin { 'check_yum': }
+    }
+    default: {
+      # nothing specific yet
+    }
+  }
 }
