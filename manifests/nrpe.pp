@@ -49,6 +49,7 @@ class icinga::nrpe(
   icinga::nrpe::command{[
     'check_cpu',
     'check_memory',
+    'check_yum',
   ]:} ~>
   icinga::nrpe::command{
     'check_load':
