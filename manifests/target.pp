@@ -25,6 +25,9 @@ class icinga::target(
 
   case $osfamily {
     'RedHat': {
+      package { 'perl-Nagios-Plugin':
+        ensure => 'present',
+      }
       icinga::plugin { 'check_yum': }
     }
     default: {
