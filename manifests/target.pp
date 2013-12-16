@@ -1,7 +1,7 @@
 class icinga::target(
   $use = 'generic-host',
-  $parents => undef,
-  $hostgroups => undef,
+  $parents = undef,
+  $hostgroups = undef,
 ) {
   if defined (Class['::icinga']) {
     Class['::icinga'] <- Class['::icinga::target']
