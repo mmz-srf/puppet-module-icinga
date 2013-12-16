@@ -23,7 +23,7 @@ class icinga::target(
 
   if $hostgroups {
     Nagios_host[$fqdn] {
-      parents => $hostgroups,
+      hostgroups => $hostgroups,
     }
   }
 
