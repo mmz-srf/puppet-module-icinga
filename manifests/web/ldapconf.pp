@@ -1,12 +1,12 @@
 class icinga::web::ldapconf (
-    $ldap_enabled     = false,
-    $ldap_dsn         = 'ldap://ldap.myopenldap.foo/',
-    $ldap_start_tls   = false,
-    $ldap_basedn      = 'dc=myopenldap,dc=foo',
-    $ldap_binddn      = 'cn=user,ou=authusers,dc=myopenldap,dc=foo',
-    $ldap_bindpw      = 'XXXXXXXXX',
-    $ldap_userattr    = 'uid',
-    $ldap_filter_user = '(&(uid=__USERNAME__))',
+    $enabled     = false,
+    $dsn         = 'ldap://ldap.myopenldap.foo/',
+    $start_tls   = false,
+    $basedn      = 'dc=myopenldap,dc=foo',
+    $binddn      = 'cn=user,ou=authusers,dc=myopenldap,dc=foo',
+    $bindpw      = 'XXXXXXXXX',
+    $userattr    = 'uid',
+    $filter_user = '(&(uid=__USERNAME__))',
 ) {
   file { '/etc/icinga-web/conf.d/auth.xml':
     content => template('icinga/icinga-web/auth.xml.erb'),

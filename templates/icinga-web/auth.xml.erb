@@ -13,16 +13,16 @@
 	</setting>
 
 	<setting name="provider">
-<% ldap_enabled = scope.lookupvar('icinga::web::ldapconf::ldap_enabled') %>
+<% ldap_enabled = scope.lookupvar('icinga::web::ldapconf::enabled') %>
 <% if ldap_enabled %>
 
-<% ldap_dsn         = scope.lookupvar('icinga::web::ldapconf::ldap_dns') %>
-<% ldap_start_tls   = scope.lookupvar('icinga::web::ldapconf::ldap_start_tls') %>
-<% ldap_basedn      = scope.lookupvar('icinga::web::ldapconf::ldap_basedn') %>
-<% ldap_binddn      = scope.lookupvar('icinga::web::ldapconf::ldap_binddn') %>
-<% ldap_bindpw      = scope.lookupvar('icinga::web::ldapconf::ldap_bindpw') %>
-<% ldap_userattr    = scope.lookupvar('icinga::web::ldapconf::ldap_userattr') %>
-<% ldap_filter_user = scope.lookupvar('icinga::web::ldapconf::ldap_filter_user') %>
+<% ldap_dsn         = scope.lookupvar('icinga::web::ldapconf::dns') %>
+<% ldap_start_tls   = scope.lookupvar('icinga::web::ldapconf::start_tls') %>
+<% ldap_basedn      = scope.lookupvar('icinga::web::ldapconf::basedn') %>
+<% ldap_binddn      = scope.lookupvar('icinga::web::ldapconf::binddn') %>
+<% ldap_bindpw      = scope.lookupvar('icinga::web::ldapconf::bindpw') %>
+<% ldap_userattr    = scope.lookupvar('icinga::web::ldapconf::userattr') %>
+<% ldap_filter_user = scope.lookupvar('icinga::web::ldapconf::filter_user') %>
 
 		<ae:parameter name="openldap-ldap1">
 			<ae:parameter name="auth_module">AppKit</ae:parameter>
