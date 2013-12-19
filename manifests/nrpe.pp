@@ -59,7 +59,7 @@ class icinga::nrpe(
     'check_disk':
       command => 'check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$';
     'check_disk_all':
-      command => 'check_disk -w $ARG1$ -c $ARG2$';
+      command => 'check_disk -w $ARG1$ -c $ARG2$ -l';
     'check_proc':
       command => 'check_procs -w $ARG1$ -c $ARG2$ -C $ARG3$';
     'check_procs':
