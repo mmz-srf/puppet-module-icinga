@@ -47,7 +47,6 @@ class icinga::nrpe(
     mode    => 444,
   } ~>
   icinga::nrpe::command{[
-    'check_cpu',
     'check_memory',
   ]:} ~>
   icinga::nrpe::command{
