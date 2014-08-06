@@ -39,7 +39,7 @@ class icinga(
     require => Service['ido2db'],
   }
   icinga::cfg{[
-    'icinga',
+    #'icinga', # use the good damn default icinga config in a module! 
     'ido2db',
     'idomod',
     'resource',
