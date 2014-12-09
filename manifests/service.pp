@@ -46,7 +46,7 @@ define icinga::service (
   $service_description = false,
   $servicegroups = false,
   $stalking_options = false,
-  $target = false,
+  $target = "/etc/icinga/objects/${::hostname}_services.cfg",
   $use = false
 ) {
   if $use_nrpe {
@@ -106,6 +106,7 @@ define icinga::service (
     servicegroups => $servicegroups,
     stalking_options => $stalking_options,
     target => $target,
-    use => $use
+    use => $use,
+    mode => '644',
   }
 }
