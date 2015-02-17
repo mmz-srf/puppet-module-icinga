@@ -40,7 +40,7 @@ class icinga(
   }
   icinga::cfg{[
     #'icinga', # use the good damn default icinga config in a module! 
-    'ido2db',
+    #'ido2db',
     #'idomod',
     'resource',
   ]:}
