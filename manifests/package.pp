@@ -6,7 +6,6 @@ class icinga::package {
     ensure => $::icinga::version,
     notify => [
       Service['icinga'],
-      Service['ido2db'],
     ],
   } 
   case $::osfamily {

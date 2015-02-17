@@ -29,19 +29,19 @@ class icinga(
 
   service{[
     'icinga',
-    'ido2db',
+    #'ido2db',
   ]:
     hasstatus => true,
     ensure    => running,
     enable    => true,
   }
   Service['icinga']{
-    require => Service['ido2db'],
+    #require => Service['ido2db'],
   }
   icinga::cfg{[
     #'icinga', # use the good damn default icinga config in a module! 
     'ido2db',
-    'idomod',
+    #'idomod',
     'resource',
   ]:}
 

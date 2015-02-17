@@ -12,7 +12,6 @@ define icinga::cfg() {
     ],
     notify => [
       Service['icinga'],
-      Service['ido2db'],
     ],
     owner => root, group => root, mode => 0444;
   }
