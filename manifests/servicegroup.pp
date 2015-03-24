@@ -1,10 +1,10 @@
 define icinga::servicegroup (
   $ensure = present,
   $servicegroupalias,
-  $target = "/etc/icinga/objects/${::hostname}_servicegroup.cfg",
+  $target = "/etc/icinga/objects/servicegroup_icinga.cfg",
 ) {
 
-  @@nagios_servicegroup{"${hostname}_${name}_servicegroup":
+  @@nagios_servicegroup{"${name}_servicegroup":
     ensure => $ensure,
     alias  => $servicegroupalias,
     notify => Service['icinga'],
