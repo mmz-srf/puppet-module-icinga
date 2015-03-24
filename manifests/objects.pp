@@ -8,7 +8,7 @@ class icinga::objects {
     'host',
     'hostextinfo',
     'hostgroup',
-    'servicegroup',
+    #'servicegroup',
     'service',
     'servicedependency',
     'serviceescalation',
