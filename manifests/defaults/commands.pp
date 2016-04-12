@@ -12,7 +12,7 @@ class icinga::defaults::commands {
     'check_udp':
       command_line => '$USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$';
     'check_dig':
-     command_line => '$USER1$/check_dig -H $HOSTADDRESS$ -l $ARG1$';
+      command_line => '$USER1$/check_dig -H $HOSTADDRESS$ -l $ARG1$';
     'check_ssh':
       command_line => '$USER1$/check_ssh $HOSTADDRESS$';
     'check_ssh_port':
@@ -35,8 +35,10 @@ class icinga::defaults::commands {
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -s $ARG3$';
     'check_https_cert':
       command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
-    'check_https_sni_cert':
+    'check_https_sni_local_cert':
       command_line => '$USER1$/check_http --ssl -C $ARG2$ --sni -H $ARG1$ -I $HOSTADDRESS$';
+    'check_https_sni_loadbalancer_cert':
+      command_line => '$USER1$/check_http --ssl -C $ARG2$ --sni -H $ARG1$';
     'check_mysql':
       command_line => '$USER1$/check_mysql -H $ARG1$ -P $ARG2$ -u $ARG3$ -p $ARG4$';
     'check_mysql_db':
