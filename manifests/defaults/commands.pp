@@ -35,6 +35,8 @@ class icinga::defaults::commands {
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -s $ARG3$';
     'check_https_cert':
       command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
+    'check_https_sni_cert':
+      command_line => '$USER1$/check_http --ssl -C $ARG2$ --sni -H $ARG1$ -I $HOSTADDRESS$';
     'check_mysql':
       command_line => '$USER1$/check_mysql -H $ARG1$ -P $ARG2$ -u $ARG3$ -p $ARG4$';
     'check_mysql_db':
