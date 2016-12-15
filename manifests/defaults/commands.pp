@@ -35,10 +35,12 @@ class icinga::defaults::commands {
       command_line => '$USER1$/check_http --ssl -H $ARG1$ -u $ARG2$ -s $ARG3$';
     'check_https_cert':
       command_line => '$USER1$/check_http --ssl -C 20 -H $HOSTADDRESS$ -I $HOSTADDRESS$';
+    # Checks the local certificate, needs a host header as argument
     'check_https_sni_local_cert':
       command_line => '$USER1$/check_http --ssl -C $ARG2$ --sni -H $ARG1$ -I $HOSTADDRESS$';
+    # Checks a certificate on a loadbalancer, if not specified, host header equals request target (service-dns-name of the loadbalancer service)
     'check_https_sni_loadbalancer_cert':
-      command_line => '$USER1$/check_http --ssl -C $ARG2$ --sni -H $ARG1$';
+      command_line => '$USER1$/check_http --ssl -C $ARG2$ --sni -H $ARG1$ -I $ARG3$';
     'check_mysql':
       command_line => '$USER1$/check_mysql -H $ARG1$ -P $ARG2$ -u $ARG3$ -p $ARG4$';
     'check_mysql_db':
