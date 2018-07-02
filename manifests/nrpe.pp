@@ -44,7 +44,7 @@ class icinga::nrpe(
     notify  => Service['nrpe'],
     owner   => root,
     group   => root,
-    mode    => 444,
+    mode    => '444',
   } ~>
   icinga::nrpe::command{[
     'check_cpu',
