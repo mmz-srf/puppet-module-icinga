@@ -6,6 +6,6 @@ class icinga::defaults::templates {
       "puppet://$server/modules/icinga/core/templates.cfg" ],
     require => Package['icinga'],
     notify => Service['icinga'],
-    mode => 0444, owner => root, group => root;
+    mode => '0444', owner => root, group => root;
   }
 }

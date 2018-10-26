@@ -26,7 +26,7 @@ class icinga::web(
       ],
       require => Package['icinga-web'],
       notify => Class[$webserver],
-      owner => root, group => root, mode => 0444;
+      owner => root, group => root, mode => '0444';
     }
   }
 
@@ -44,13 +44,13 @@ class icinga::web(
 
         file { '/var/lib/icinga/rw':
           ensure => directory,
-          mode   => 0755,
+          mode   => '0755',
         }
       } else {
         include apache
       }
 
-      $webserver_conf = $::osfamily ? { 
+      $webserver_conf = $::osfamily ? {
         'debian' => '/etc/apache2/conf.d/icinga-web.conf',
         'redhat' => '/etc/httpd/conf.d/icinga-web.conf',
       }
@@ -69,14 +69,14 @@ class icinga::web(
     path => $webserver_conf,
     require => Package['icinga-web'],
     notify => Service['httpd'],
-    owner => root, group => root, mode => 0444;
+    owner => root, group => root, mode => '0444';
   }
   user::groups::manage_member{"${webserver}-in-icingacmd":
-    user => $::osfamily ? { 
+    user => $::osfamily ? {
       'debian' => 'www-data',
       'redhat' => $webserver,
     },
-    group => $::osfamily ? { 
+    group => $::osfamily ? {
       'debian' => 'nagios',
       'redhat' => 'icingacmd',
     }
@@ -91,7 +91,7 @@ class icinga::web(
   }
   # clear webcache
   exec{'icinga_web_clearcache':
-    command    => $::osfamily ? { 
+    command    => $::osfamily ? {
       'debian' => '/usr/lib/icinga-web/bin/clearcache.sh',
       'redhat' => '/usr/bin/icinga-web-clearcache',
     },

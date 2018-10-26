@@ -13,6 +13,6 @@ define icinga::cfg() {
     notify => [
       Service['icinga'],
     ],
-    owner => root, group => root, mode => 0444;
+    owner => root, group => root, mode => '0444';
   }
 }

@@ -5,19 +5,19 @@ class icinga::nrpe(
   $nrpe_debug = 0,
   $nrpe_command_timeout = 60,
   $nrpe_connection_timeout = 300,
-  $nrpe_pid = $::osfamily ? { 
+  $nrpe_pid = $::osfamily ? {
     'debian' => '/var/run/nagios/nrpe.pid',
     'redhat' => '/var/run/nrpe.pid',
   },
-  $nrpe_user = $::osfamily ? { 
+  $nrpe_user = $::osfamily ? {
     'debian' => 'nagios',
     'redhat' => 'nrpe',
   },
-  $nrpe_group = $::osfamily ? { 
+  $nrpe_group = $::osfamily ? {
     'debian' => 'nagios',
     'redhat' => 'nrpe',
   },
-  $libdir = $::osfamily ? { 
+  $libdir = $::osfamily ? {
     'debian' => 'lib',
     'redhat' => $architecture ? {
       x86_64  => 'lib64',
@@ -28,7 +28,7 @@ class icinga::nrpe(
 
   package{'nrpe':
     ensure => installed,
-    name   => $::osfamily ? { 
+    name   => $::osfamily ? {
       'debian' => 'nagios-nrpe-server',
       'redhat' => 'nrpe',
     }
@@ -44,7 +44,7 @@ class icinga::nrpe(
     notify  => Service['nrpe'],
     owner   => root,
     group   => root,
-    mode    => 444,
+    mode    => '444',
   } ~>
   icinga::nrpe::command{[
     'check_cpu',
@@ -71,7 +71,7 @@ class icinga::nrpe(
     ensure    => running,
     enable    => true,
     hasstatus => true,
-    name      => $::osfamily ? { 
+    name      => $::osfamily ? {
       'debian' => 'nagios-nrpe-server',
       'redhat' => 'nrpe',
     }

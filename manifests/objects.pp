@@ -22,17 +22,6 @@ class icinga::objects {
     'redhat'  => suffix(prefix($objects, "$::icinga::cfgdir/objects/"), '.cfg'),
   }
 
-  define icinga_nagios_symlink {
-    $object_pathname_icinga = $::osfamily ? {
-      'debian'  => "$::icinga::cfgdir/objects/${name}_icinga.cfg",
-      'redhat'  => "$::icinga::cfgdir/objects/${name}.cfg",
-    } 
-    file{$object_pathname_icinga:
-      ensure => link,
-      target => "/etc/nagios/nagios_${name}.cfg",
-    }
-  }
-
   # remove icinga example conf files in objects dir
   case $::osfamily {
     'redhat': {
@@ -49,7 +38,7 @@ class icinga::objects {
         ensure => absent,
         require => Package['icinga'],
         before => Service['icinga'],
-      } 
+      }
     }
     'debian': {
       file{[
@@ -66,7 +55,7 @@ class icinga::objects {
         ensure => absent,
         require => Package['icinga'],
         before => Service['icinga'],
-      } 
+      }
     }
   }
 
@@ -75,7 +64,7 @@ class icinga::objects {
     ensure  => directory,
     owner   => root,
     group   => root,
-    mode    => 0555,
+    mode    => '0555',
     recurse => true,
   } ->
   file{$object_pathnames_puppet:
@@ -85,9 +74,9 @@ class icinga::objects {
     notify  => Service['icinga'],
     owner   => root,
     group   => root,
-    mode    => 0444,
+    mode    => '0444',
   } ->
-  icinga_nagios_symlink{$objects:
+  icinga::icinga_nagios_symlink { $objects :
     before => Service['icinga']
   }
 
