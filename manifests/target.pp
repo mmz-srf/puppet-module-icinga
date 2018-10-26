@@ -10,7 +10,7 @@ class icinga::target(
   include ::icinga::plugins
 
   @@nagios_host{$fqdn:
-    address => $ipaddress,
+    address => $ipaddress_eth0,
     alias => $hostname,
     use => $use,
   }

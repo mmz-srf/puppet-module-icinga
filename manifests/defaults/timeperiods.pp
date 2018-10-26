@@ -9,6 +9,15 @@ class icinga::defaults::timeperiods {
       friday      => '00:00-24:00',
       saturday    => '00:00-24:00',
       sunday      => '00:00-24:00';
+    'clouddayhours':
+      alias       => 'Cloudday hours',
+      monday      => '06:30-23:55',
+      tuesday     => '06:30-23:55',
+      wednesday   => '06:30-23:55',
+      thursday    => '06:30-23:55',
+      friday      => '06:30-23:55',
+      saturday    => '06:30-23:55',
+      sunday      => '06:30-23:55';
     'workhours':
       alias       => 'Standard Work Hours',
       monday      => '09:00-19:00',
