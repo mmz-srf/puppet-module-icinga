@@ -59,11 +59,12 @@ then
         exit 0
 fi
 # Total memory available
-total=`free -m | head -2 |tail -1 |gawk '{print $2}'`
 # Total memory used
-used=`free -m | head -2 |tail -1 |gawk '{print $3}'`
+used=`free -m | grep 'buffers' | tail -1| gawk '{print $3}'`
 # Calc total minus used
-free=`free -m | head -2 |tail -1 |gawk '{print $2-$3}'`
+free=`free -m | grep 'buffers' | tail -1| gawk '{print $4}'`
+total=$(($free + $used))
+
 # normal values
 #echo "$total"MB total
 #echo "$used"MB used
