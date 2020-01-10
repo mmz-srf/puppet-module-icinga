@@ -1,4 +1,4 @@
 puppet-module-icinga
 ====================
 
-DO NOT USE ME... there are better puppet icinga modules out there. 
+It's not the best module out there, it's the one we have...
