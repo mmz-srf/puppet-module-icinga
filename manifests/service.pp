@@ -44,14 +44,14 @@ define icinga::service (
   $retry_check_interval = false,
   $retry_interval = false,
   $service_description = false,
-  $servicegroups = false,
+  $servicegroups = "plf-team_servicegroup",
   $stalking_options = false,
   $target = "/etc/icinga/objects/${::hostname}_services.cfg",
   $use = false
 ) {
   if $use_nrpe {
     $real_check_command = "check_nrpe!$check_command!'$nrpe_args'"
-  } else { 
+  } else {
     $real_check_command = $check_command
   }
   Nagios_service{
