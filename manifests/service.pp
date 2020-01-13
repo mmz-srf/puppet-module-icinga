@@ -44,7 +44,7 @@ define icinga::service (
   $retry_check_interval = false,
   $retry_interval = false,
   $service_description = false,
-  $servicegroups = "plf-team_servicegroup",
+  $servicegroups = "platform-team_servicegroup",
   $stalking_options = false,
   $target = "/etc/icinga/objects/${::hostname}_services.cfg",
   $use = false
