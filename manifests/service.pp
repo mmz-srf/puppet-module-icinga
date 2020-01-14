@@ -51,7 +51,7 @@ define icinga::service (
 ) {
   if $use_nrpe {
     $real_check_command = "check_nrpe!$check_command!'$nrpe_args'"
-  } else { 
+  } else {
     $real_check_command = $check_command
   }
   Nagios_service{
