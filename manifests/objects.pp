@@ -80,11 +80,6 @@ class icinga::objects {
     before => Service['icinga']
   }
 
-  # purge unmanaged resources
-  resources{$object_resourcenames:
-    purge => true,
-  }
-
   Nagios_command <<||>>
   Nagios_contact <<||>>
   Nagios_contactgroup <<||>>
